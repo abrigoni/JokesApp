@@ -10,8 +10,9 @@ const styles = StyleSheet.create({
     paddingTop: 80,
     paddingBottom: 30,
     paddingHorizontal: 12,
-    backgroundColor: Colors.purple, //todo: prop/randomize
     borderRadius: 8,
+    marginHorizontal: 8,
+    width: 330
   },
   text: {
     color: Colors.white,
@@ -28,12 +29,13 @@ const styles = StyleSheet.create({
 
 interface Props {
   content: string;
+  backgroundColor: string;
   style?: StyleProp<ViewStyle>;
 };
 
-const JokeCard: FC<Props> = ({content, style}) => {
+const JokeCard: FC<Props> = ({content, style, backgroundColor}) => {
   return (
-    <View style={[styles.card, style]}>
+    <View style={[styles.card, style, {backgroundColor}]}>
       <Text style={styles.text}>{content}</Text>
       <Text style={styles.author}>@designhumor</Text>
     </View>
