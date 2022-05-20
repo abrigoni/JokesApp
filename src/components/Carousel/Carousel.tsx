@@ -1,32 +1,35 @@
 import React, { FC } from 'react'
-import { View, FlatList, Text, StyleSheet, ListRenderItem } from 'react-native';
-import Steps from './Steps';
+import { View, StyleSheet, Animated, } from 'react-native';
+import { Colors } from '../../utils/colors';
+import Indicator from './Indicator';
 
 const styles = StyleSheet.create({
-  stepperContainer: {
-    marginTop: 32,
+  carouselContainer: {
+    flex: 1,
   },
 });
-
 interface Props {
   items: any[];
-  renderItem: ListRenderItem<any>;
+  renderItem: any;
 }
 
-
 const Carousel: FC<Props> = ({items, renderItem}) => {
+  const scrollX = React.useRef(new Animated.Value(0)).current;
   return (
-    <View style={{flex: 1}}>
-        <FlatList
+    <View style={styles.carouselContainer}>
+        <Animated.FlatList
           data={items}
-          renderItem={renderItem}
+          renderItem={renderItem.bind(this, scrollX)}
           horizontal
           showsHorizontalScrollIndicator={false}
-          maxToRenderPerBatch={1}
+          scrollEventThrottle={32}
+          onScroll={Animated.event(
+            [{nativeEvent: {contentOffset: { x: scrollX }}}],
+            {useNativeDriver: false},
+          )}
+          pagingEnabled
         />
-        <View style={styles.stepperContainer}>
-          <Steps length={items.length} currentIndex={0} />
-        </View>
+        <Indicator scrollX={scrollX} itemsQty={items.length} />
     </View>
   )
 }

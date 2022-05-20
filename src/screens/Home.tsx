@@ -4,13 +4,12 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
+  Dimensions,
 } from 'react-native';
 import { Colors } from '../utils/colors';
 import JokeCard from '../components/JokeCard';
 import Button from '../components/Button';
 import Carousel from '../components/Carousel';
-import { randomCardColor } from '../utils/jokeCardColor';
 
 const DUMMY_JOKES = [
   "Anyway. You're the designer and you know that to do best.",
@@ -39,8 +38,22 @@ const styles = StyleSheet.create({
 });
 
 
-const renderJokeItem = ({item}: {item: any}) => {
-  return <JokeCard content={item} backgroundColor={randomCardColor()}/>;
+const { width } = Dimensions.get('window');
+
+const JOKE_CARD_COLORS: string[] = [
+  Colors.purple,
+  Colors.orange,
+  Colors.red,
+  Colors.green,
+];
+
+
+const renderJokeItem = (scrollX: any, {item}: any) => {
+  const backgroundColor = scrollX.interpolate({
+    inputRange: JOKE_CARD_COLORS.map((_, i) => i * width),
+    outputRange: JOKE_CARD_COLORS.map((bg) => bg),
+  });
+  return <JokeCard content={item} backgroundColor={backgroundColor}/>;
 };
 
 const Home = () => {

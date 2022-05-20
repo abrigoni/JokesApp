@@ -1,6 +1,9 @@
 import React, { FC } from 'react'
-import { View, StyleSheet, Text, StyleProp, ViewStyle } from 'react-native';
+import { Animated, StyleSheet, Text, StyleProp, ViewStyle, Dimensions } from 'react-native';
 import { Colors } from '../../utils/colors';
+
+const { width } = Dimensions.get('window');
+
 
 const styles = StyleSheet.create({
   card: {
@@ -9,10 +12,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingTop: 80,
     paddingBottom: 30,
-    paddingHorizontal: 12,
     borderRadius: 8,
     marginHorizontal: 8,
-    width: 330
+    width: width * 0.84,
   },
   text: {
     color: Colors.white,
@@ -35,10 +37,10 @@ interface Props {
 
 const JokeCard: FC<Props> = ({content, style, backgroundColor}) => {
   return (
-    <View style={[styles.card, style, {backgroundColor}]}>
+    <Animated.View style={[styles.card, style, {backgroundColor}]}>
       <Text style={styles.text}>{content}</Text>
       <Text style={styles.author}>@designhumor</Text>
-    </View>
+    </Animated.View>
   )
 }
 
