@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 
 
 const FONT_NAME = "OpenSans";
@@ -10,6 +10,7 @@ type TextSizes = "H1" | "H2";
 interface Props {
   variant?: TextVariants;
   size: TextSizes;
+  style?: StyleProp<ViewStyle>;
 }
 
 const sizesStyle = StyleSheet.create({
@@ -30,9 +31,9 @@ const variantsStyle = StyleSheet.create({
   },
 });
 
-const OpenSansText: FC<Props> = ({children, variant = "Regular", size}) => {
+const OpenSansText: FC<Props> = ({children, variant = "Regular", size, style}) => {
   return (
-    <Text style={[sizesStyle[size], variantsStyle[variant]]}>{children}</Text>
+    <Text style={[sizesStyle[size], variantsStyle[variant], style]}>{children}</Text>
   );
 };
 
