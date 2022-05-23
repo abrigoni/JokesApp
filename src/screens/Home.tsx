@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
   },
   screenContent: {
     flex: 1,
-    paddingVertical: 24,
+    paddingBottom: 24,
+    paddingHorizontal: width * 0.05,
   },
   title: {
     fontFamily: 'OpenSans-Bold',
@@ -38,7 +39,6 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     marginVertical: 32,
-    paddingHorizontal: width * 0.05,
     flex: 1,
   },
 });
@@ -58,6 +58,8 @@ const renderJokeItem = (scrollX: any, {item}: any) => {
   });
   return <JokeCard content={item} backgroundColor={backgroundColor}/>;
 };
+
+export const HOME_ROUTE = 'Home';
 
 const Home = () => {
   return (

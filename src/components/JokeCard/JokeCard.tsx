@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Animated, StyleSheet, Text, StyleProp, ViewStyle, Dimensions } from 'react-native';
+import { Animated, StyleSheet, Text, StyleProp, ViewStyle, Dimensions, View } from 'react-native';
 import { Colors } from '../../utils/colors';
 
 const { width } = Dimensions.get('window');
@@ -27,19 +27,41 @@ const styles = StyleSheet.create({
     fontFamily: 'IndieFlower',
     color: Colors.white,
   },
+  bottom: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  authorWithIcon: {
+    marginRight: 8,
+  },
 });
 
 interface Props {
   content: string;
   backgroundColor: string;
   style?: StyleProp<ViewStyle>;
+  titleStyle?: any;
+  authorStyle?: any;
+  BottomIcon?: any;
 };
 
-const JokeCard: FC<Props> = ({content, style, backgroundColor}) => {
+const JokeCard: FC<Props> = ({content, style, backgroundColor, titleStyle, authorStyle, BottomIcon = undefined}) => {
+  
+  const renderBottom = () => {
+    if (!!!BottomIcon) {
+      return <Text style={[styles.author, authorStyle]}>@designhumor</Text>;
+    }
+    return (
+      <View style={styles.bottom}>
+        <Text style={[styles.author, authorStyle, styles.authorWithIcon]}>@designhumor</Text>
+        {BottomIcon}
+      </View>
+    )
+  };
   return (
     <Animated.View style={[styles.card, style, {backgroundColor}]}>
-      <Text style={styles.text}>{content}</Text>
-      <Text style={styles.author}>@designhumor</Text>
+      <Text style={[styles.text, titleStyle]}>{content}</Text>
+      {renderBottom()}
     </Animated.View>
   )
 }

@@ -4,7 +4,7 @@ import { Text, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 
 const FONT_NAME = "OpenSans";
 type TextVariants = "Bold" | "Regular";
-type TextSizes = "H1" | "H2";
+type TextSizes = "H1" | "H2" | "Body";
 
 
 interface Props {
@@ -20,6 +20,9 @@ const sizesStyle = StyleSheet.create({
   H2: {
     fontSize: 24,
   },
+  Body: {
+    fontSize: 17,
+  }
 });
 
 const variantsStyle = StyleSheet.create({
