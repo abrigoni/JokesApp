@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import { View, StyleSheet, Animated, } from 'react-native';
-import { Colors } from '../../utils/colors';
 import Indicator from './Indicator';
 
 const styles = StyleSheet.create({
@@ -28,6 +27,7 @@ const Carousel: FC<Props> = ({items, renderItem}) => {
             {useNativeDriver: false},
           )}
           pagingEnabled
+          keyExtractor={(_, index) => index.toString()}
         />
         <Indicator scrollX={scrollX} itemsQty={items.length} />
     </View>

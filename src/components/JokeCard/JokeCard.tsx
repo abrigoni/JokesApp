@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
     paddingTop: 80,
     paddingBottom: 30,
     borderRadius: 8,
-    marginHorizontal: 8,
-    width: width * 0.84,
+    marginHorizontal: 20,
+    width: width * 0.8,
   },
   text: {
     color: Colors.white,
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
   author: {
     fontSize: 22,
-    fontFamily: 'IndieFlower-Regular',
+    fontFamily: 'IndieFlower',
     color: Colors.white,
   },
 });
