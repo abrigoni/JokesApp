@@ -10,7 +10,7 @@ type TextSizes = "H1" | "H2" | "Body";
 interface Props {
   variant?: TextVariants;
   size: TextSizes;
-  style?: StyleProp<ViewStyle>;
+  style?: any;
 }
 
 const sizesStyle = StyleSheet.create({

@@ -26,6 +26,9 @@ const styles = StyleSheet.create({
   author: {
     fontSize: 16,
   },
+  fallbackText: {
+    textAlign: 'center'
+  }
 });
 
 interface Props {
@@ -46,21 +49,27 @@ const SavedJokes: FC<Props> = ({navigation}) => {
 
   return (
     <View style={styles.screen}>
-      <FlatList
-        data={savedJokes}
-        numColumns={2}
-        renderItem={({ item }) => (
-            <JokeCard
-              content={item.joke}
-              backgroundColor={Colors.orange}
-              style={styles.card}
-              titleStyle={styles.title}
-              authorStyle={styles.author}
-              BottomIcon={<IconButton iconProps={{name: 'trash', size: 20,}} onPress={handleDelete.bind(this, item.id)} />}
-            />
-          )
-        }
-      />
+      {savedJokes.length === 0 ? (
+        <OpenSansText style={styles.fallbackText} size="H2" variant="Regular">
+          Nothing saved 😭
+        </OpenSansText>
+      ) : (
+        <FlatList
+          data={savedJokes}
+          numColumns={2}
+          renderItem={({ item }) => (
+              <JokeCard
+                content={item.joke}
+                backgroundColor={Colors.orange}
+                style={styles.card}
+                titleStyle={styles.title}
+                authorStyle={styles.author}
+                BottomIcon={<IconButton iconProps={{name: 'trash', size: 20,}} onPress={handleDelete.bind(this, item.id)} />}
+              />
+            )
+          }
+        />
+      )}
     </View>
   )
 }

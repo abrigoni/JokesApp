@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: 'black',
   },
+  pressed: {
+    opacity: .25,
+  },
   text: {
     fontSize: 18,
     fontFamily: 'OpenSans-SemiBold',
@@ -20,7 +23,7 @@ const styles = StyleSheet.create({
 
 const Button: FC<ButtonProps> = (props) => {
   return (
-    <Pressable style={styles.button} {...props}>
+    <Pressable style={({pressed}) => pressed ? [styles.button, styles.pressed] : styles.button} {...props}>
       <Text style={styles.text}>{props.title}</Text>
     </Pressable>
   )

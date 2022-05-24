@@ -5,6 +5,8 @@ import Home, { HOME_ROUTE } from './screens/Home';
 import SavedJokes, { SAVED_JOKES_ROUTE } from './screens/SavedJokes';
 import { Colors } from './utils/colors';
 import AppContextProvider from './context/AppContext';
+import { ApolloProvider } from '@apollo/client';
+import { client } from './graphql/client';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,11 +39,14 @@ const Main = () => {
   )
 }
 
+
 const App = () => {
   return (
-    <AppContextProvider>
-      <Main />
-    </AppContextProvider>
+    <ApolloProvider client={client}>
+      <AppContextProvider>
+        <Main />
+      </AppContextProvider>
+    </ApolloProvider>
   );
 };
 
