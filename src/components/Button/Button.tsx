@@ -1,10 +1,6 @@
 import React, { FC } from 'react'
-import { Pressable, Text, StyleSheet } from 'react-native';
+import { Pressable, Text, StyleSheet, ButtonProps } from 'react-native';
 import { Colors } from '../../utils/colors';
-
-type Props = {
-  title: string;
-};
 
 const styles = StyleSheet.create({
   button: {
@@ -22,10 +18,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const Button: FC<Props> = ({title}) => {
+const Button: FC<ButtonProps> = (props) => {
   return (
-    <Pressable style={styles.button}>
-      <Text style={styles.text}>{title}</Text>
+    <Pressable style={styles.button} {...props}>
+      <Text style={styles.text}>{props.title}</Text>
     </Pressable>
   )
 }

@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { View, StyleSheet, Animated, } from 'react-native';
+import { View, StyleSheet, Animated, Dimensions } from 'react-native';
 import Indicator from './Indicator';
 
 const styles = StyleSheet.create({
@@ -10,9 +10,12 @@ const styles = StyleSheet.create({
 interface Props {
   items: any[];
   renderItem: any;
+  updateIndex?: (number: number) => void;
 }
 
-const Carousel: FC<Props> = ({items, renderItem}) => {
+const { width } = Dimensions.get('window');
+
+const Carousel: FC<Props> = ({items, renderItem, updateIndex}) => {
   const scrollX = React.useRef(new Animated.Value(0)).current;
   return (
     <View style={styles.carouselContainer}>
@@ -26,6 +29,12 @@ const Carousel: FC<Props> = ({items, renderItem}) => {
             [{nativeEvent: {contentOffset: { x: scrollX }}}],
             {useNativeDriver: false},
           )}
+          onMomentumScrollEnd={(event) => {
+            if (!!updateIndex) {
+              let index = Math.ceil(event.nativeEvent.contentOffset.x / width);
+              updateIndex(index);
+            }
+          }}
           pagingEnabled
           keyExtractor={(_, index) => index.toString()}
         />

@@ -1,31 +1,14 @@
-import React from 'react'
+import React, { FC, useContext, useLayoutEffect } from 'react'
 import { Text, View, StyleSheet, Dimensions, FlatList } from 'react-native'
 import IconButton from '../components/IconButton';
 import JokeCard from '../components/JokeCard';
+import { OpenSansText } from '../components/Typography';
+import { AppContext } from '../context/AppContext';
 import { Colors } from '../utils/colors';
 
 export const SAVED_JOKES_ROUTE = "SavedJokes";
 
 const { width, height } = Dimensions.get('window');
-
-const DUMMY_JOKES = [
-  "Anyway. You're the designer and you know that to do best.",
-  "Mmmh. Do you think it will be easy to read? Let's make it bigger 😂",
-  "There's something that doesn't work. But I'm not sure what.",
-  "Anyway. You're the designer and you know that to do best.",
-  "Anyway. You're the designer and you know that to do best.",
-  "Mmmh. Do you think it will be easy to read? Let's make it bigger 😂",
-  "There's something that doesn't work. But I'm not sure what.",
-  "Anyway. You're the designer and you know that to do best.",
-  "Anyway. You're the designer and you know that to do best.",
-  "Mmmh. Do you think it will be easy to read? Let's make it bigger 😂",
-  "There's something that doesn't work. But I'm not sure what.",
-  "Anyway. You're the designer and you know that to do best.",
-  "Anyway. You're the designer and you know that to do best.",
-  "Mmmh. Do you think it will be easy to read? Let's make it bigger 😂",
-  "There's something that doesn't work. But I'm not sure what.",
-  "Anyway. You're the designer and you know that to do best.",
-]
 
 const styles = StyleSheet.create({
   screen: {
@@ -45,21 +28,35 @@ const styles = StyleSheet.create({
   },
 });
 
+interface Props {
+  navigation: any; // todo
+}
 
-const SavedJokes = () => {
+const SavedJokes: FC<Props> = ({navigation}) => {
+  const { savedJokes, removeJoke } = useContext(AppContext);
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <OpenSansText size="Body" variant="Bold">{savedJokes.length}</OpenSansText>,
+    });
+  }, [navigation, savedJokes]);
+
+  const handleDelete = (id: string) => {
+    removeJoke(id);
+  };
+
   return (
     <View style={styles.screen}>
       <FlatList
-        data={DUMMY_JOKES}
+        data={savedJokes}
         numColumns={2}
         renderItem={({ item }) => (
             <JokeCard
-              content={item}
+              content={item.joke}
               backgroundColor={Colors.orange}
               style={styles.card}
               titleStyle={styles.title}
               authorStyle={styles.author}
-              BottomIcon={<IconButton iconProps={{name: 'trash', size: 20,}} onPress={() => {}} />}
+              BottomIcon={<IconButton iconProps={{name: 'trash', size: 20,}} onPress={handleDelete.bind(this, item.id)} />}
             />
           )
         }

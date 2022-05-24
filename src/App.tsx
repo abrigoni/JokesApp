@@ -3,14 +3,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home, { HOME_ROUTE } from './screens/Home';
 import SavedJokes, { SAVED_JOKES_ROUTE } from './screens/SavedJokes';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { Colors } from './utils/colors';
-import { OpenSansText } from './components/Typography';
-import { Pressable } from 'react-native';
+import AppContextProvider from './context/AppContext';
 
 const Stack = createNativeStackNavigator();
 
-const App = () => {
+const Main = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -22,16 +20,10 @@ const App = () => {
         <Stack.Screen
           name={HOME_ROUTE}
           component={Home}
-          options={({navigation}) => ({
+          options={{
             title: '',
-            headerRight: () => (
-              <Pressable style={{flexDirection: 'row'}} onPress={() => navigation.navigate(SAVED_JOKES_ROUTE)}>
-                <OpenSansText size="Body" variant="Bold">Saved: 5 </OpenSansText>
-                <Icon name="heart" color="#e74c3c" size={24} />
-              </Pressable>
-            ),
             headerShadowVisible: false,
-          })}
+          }}
         />
         <Stack.Screen
           name={SAVED_JOKES_ROUTE}
@@ -42,6 +34,14 @@ const App = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
+  )
+}
+
+const App = () => {
+  return (
+    <AppContextProvider>
+      <Main />
+    </AppContextProvider>
   );
 };
 

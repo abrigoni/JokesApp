@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Animated, StyleSheet, Text, StyleProp, ViewStyle, Dimensions, View } from 'react-native';
+import { Animated, StyleSheet, Text, StyleProp, ViewStyle, Dimensions, View, Platform } from 'react-native';
 import { Colors } from '../../utils/colors';
 
 const { width } = Dimensions.get('window');
@@ -24,7 +24,10 @@ const styles = StyleSheet.create({
   },
   author: {
     fontSize: 22,
-    fontFamily: 'IndieFlower',
+    fontFamily: Platform.select({
+      ios: 'IndieFlower',
+      android: 'IndieFlower-Regular'
+    }),
     color: Colors.white,
   },
   bottom: {
