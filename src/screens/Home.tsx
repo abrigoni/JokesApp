@@ -22,25 +22,6 @@ import useJokes from '../hooks/useJokes';
 
 const { width } = Dimensions.get('window');
 
-const DUMMY_JOKES: Joke[] = [
-  {
-    id: "j1",
-    joke: "Anyway. You're the designer and you know that to do best.",
-  },
-    {
-    id: "j2",
-    joke: "Mmmh. Do you think it will be easy to read? Let's make it bigger 😂",
-  },
-    {
-    id: "j3",
-    joke: "There's something that doesn't work. But I'm not sure what.",
-  },
-    {
-    id: "j4",
-    joke: "Anyway. You're the designer and you know that to do best.",
-  },
-];
-
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
@@ -110,7 +91,7 @@ const Home: FC<Props> = ({navigation}) => {
   };
 
   const handleSave = () => {
-    saveJoke(DUMMY_JOKES[currentIndex]);
+    saveJoke(jokes[currentIndex]);
   };
   return (
     <SafeAreaView style={styles.screen}>
