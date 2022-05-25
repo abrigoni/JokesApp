@@ -17,7 +17,6 @@
 		31964475213640FAB51A4F93 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85BC9492F243434BB7AFEBAF /* OpenSans-Bold.ttf */; };
 		3670542121EA4EC09A4DCB28 /* IndieFlower-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C96A8B2E24C41EA8359C4BB /* IndieFlower-Regular.ttf */; };
 		4BA68D6C338C49D899545DA7 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 995592C005CD4DDDB0C23F91 /* OpenSans-BoldItalic.ttf */; };
-		4CA21F5F283C10DD006CC018 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CA21F4F283C10DD006CC018 /* EvilIcons.ttf */; };
 		4D67F34138504E039FC93BDC /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AF5CE6178714E2B9CC08229 /* OpenSans-Italic.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-JokesApp-JokesAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-JokesApp-JokesAppTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -330,7 +329,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CA21F5F283C10DD006CC018 /* EvilIcons.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				31964475213640FAB51A4F93 /* OpenSans-Bold.ttf in Resources */,

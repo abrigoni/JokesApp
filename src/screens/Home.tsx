@@ -15,7 +15,7 @@ import Carousel from '../components/Carousel';
 import { AppContext } from '../context/AppContext';
 import { OpenSansText } from '../components/Typography';
 import { SAVED_JOKES_ROUTE } from './SavedJokes';
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Joke } from '../types/Joke';
 import useJokes from '../hooks/useJokes';
 
@@ -99,7 +99,7 @@ const Home: FC<Props> = ({navigation}) => {
       headerRight: () => (
         <Pressable style={{flexDirection: 'row'}} onPress={() => navigation.navigate(SAVED_JOKES_ROUTE)}>
           <OpenSansText size="Body" variant="Bold">Saved: {savedJokes.length} </OpenSansText>
-          {/* <Icon name="heart" color="#e74c3c" size={24} /> */}
+          <Icon name="heart" color="#e74c3c" size={24} />
         </Pressable>
       ),
     });
