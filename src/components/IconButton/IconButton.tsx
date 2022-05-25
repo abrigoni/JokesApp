@@ -4,7 +4,7 @@ import { Pressable } from 'react-native'
 // import { IconProps } from 'react-native-vector-icons/Icon';
 
 interface Props {
-  iconProps: IconProps;
+  iconProps: any;
   onPress?: () => void;
 }
 
