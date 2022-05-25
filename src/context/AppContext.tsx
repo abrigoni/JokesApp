@@ -17,7 +17,9 @@ const AppContextProvider: FC = ({children}) => {
   const [savedJokes, setSavedJokes] = useState<Joke[]>([]);
 
   const saveJoke = (joke: Joke) => {
-    setSavedJokes((jokes: Joke[]) => [...jokes, joke]);
+    if (!savedJokes.includes(joke)) {
+      setSavedJokes((jokes: Joke[]) => [...jokes, joke]);
+    }
   };
 
   const removeJoke = (id: string) => {

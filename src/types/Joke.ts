@@ -3,3 +3,7 @@ export type Joke = {
   joke: string;
   permalink?: string;
 };
+
+export interface JokeQueryResponse {
+  joke: Joke;
+}

@@ -6,6 +6,7 @@ import {
   View,
   Dimensions,
   Pressable,
+  ActivityIndicator,
 } from 'react-native';
 import { Colors } from '../utils/colors';
 import JokeCard from '../components/JokeCard';
@@ -16,6 +17,7 @@ import { OpenSansText } from '../components/Typography';
 import { SAVED_JOKES_ROUTE } from './SavedJokes';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Joke } from '../types/Joke';
+import useJokes from '../hooks/useJokes';
 
 
 const { width } = Dimensions.get('window');
@@ -58,6 +60,12 @@ const styles = StyleSheet.create({
     marginVertical: 32,
     flex: 1,
   },
+  loading: {
+    flex: 1,
+    marginVertical: 32,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });
 
 const JOKE_CARD_COLORS: string[] = [
@@ -83,9 +91,9 @@ interface Props {
 };
 
 const Home: FC<Props> = ({navigation}) => {
+  const { jokes, loading } = useJokes();
   const {saveJoke, savedJokes} = useContext(AppContext);
   const [currentIndex, setCurrentIndex] = useState(0);
-
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -111,9 +119,15 @@ const Home: FC<Props> = ({navigation}) => {
           <Text style={styles.title}>Things you can say</Text>
           <Text style={styles.title}>to annoy designers.</Text>
         </View>
-        <View style={styles.cardContainer}>
-          <Carousel items={DUMMY_JOKES} renderItem={renderJokeItem} updateIndex={handleChangeIndex} />
-        </View>
+          {loading ? (
+            <View style={styles.loading}>
+              <ActivityIndicator size="large" />
+            </View>
+            ) : (
+            <View style={styles.cardContainer}>
+              <Carousel items={jokes} renderItem={renderJokeItem} updateIndex={handleChangeIndex} />
+            </View>
+          )}
         <Button title="Save" onPress={handleSave} />
       </View>
     </SafeAreaView>
