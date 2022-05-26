@@ -11,11 +11,13 @@ interface Props {
   items: any[];
   renderItem: any;
   updateIndex?: (number: number) => void;
+  onFetchMore?: () => void;
+  onFetchBack?: () => void;
 }
 
 const { width } = Dimensions.get('window');
 
-const Carousel: FC<Props> = ({items, renderItem, updateIndex}) => {
+const Carousel: FC<Props> = ({items, renderItem, updateIndex, onFetchMore, onFetchBack}) => {
   const scrollX = React.useRef(new Animated.Value(0)).current;
   return (
     <View style={styles.carouselContainer}>
@@ -30,13 +32,18 @@ const Carousel: FC<Props> = ({items, renderItem, updateIndex}) => {
             {useNativeDriver: false},
           )}
           onMomentumScrollEnd={(event) => {
+            const index = Math.ceil(event.nativeEvent.contentOffset.x / width);
             if (!!updateIndex) {
-              let index = Math.ceil(event.nativeEvent.contentOffset.x / width);
               updateIndex(index);
             }
           }}
           pagingEnabled
           keyExtractor={(_, index) => index.toString()}
+          onEndReached={() => {
+            if (onFetchMore) {
+              onFetchMore();
+            }
+          }}
         />
         <Indicator scrollX={scrollX} itemsQty={items.length} />
     </View>

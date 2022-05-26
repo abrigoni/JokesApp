@@ -72,7 +72,7 @@ interface Props {
 };
 
 const Home: FC<Props> = ({navigation}) => {
-  const { jokes, loading } = useJokes();
+  const { activeJokes, loading, triggerFetchMore} = useJokes();
   const {saveJoke, savedJokes} = useContext(AppContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   useLayoutEffect(() => {
@@ -90,8 +90,12 @@ const Home: FC<Props> = ({navigation}) => {
     setCurrentIndex(index);
   };
 
+  const handleFetchMore = () => {
+    triggerFetchMore();
+  };
+
   const handleSave = () => {
-    saveJoke(jokes[currentIndex]);
+    saveJoke(activeJokes[currentIndex]);
   };
   return (
     <SafeAreaView style={styles.screen}>
@@ -106,7 +110,12 @@ const Home: FC<Props> = ({navigation}) => {
             </View>
             ) : (
             <View style={styles.cardContainer}>
-              <Carousel items={jokes} renderItem={renderJokeItem} updateIndex={handleChangeIndex} />
+              <Carousel
+                items={activeJokes}
+                renderItem={renderJokeItem}
+                updateIndex={handleChangeIndex}
+                onFetchMore={handleFetchMore}
+              />
             </View>
           )}
         <Button title="Save" onPress={handleSave} />
