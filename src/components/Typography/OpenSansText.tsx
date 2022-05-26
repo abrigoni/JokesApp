@@ -1,11 +1,9 @@
-import React, { FC } from 'react'
-import { Text, StyleSheet, ViewStyle, StyleProp } from 'react-native';
+import React, {FC} from 'react';
+import {Text, StyleSheet} from 'react-native';
 
-
-const FONT_NAME = "OpenSans";
-type TextVariants = "Bold" | "Regular";
-type TextSizes = "H1" | "H2" | "Body";
-
+const FONT_NAME = 'OpenSans';
+type TextVariants = 'Bold' | 'Regular';
+type TextSizes = 'H1' | 'H2' | 'Body';
 
 interface Props {
   variant?: TextVariants;
@@ -22,7 +20,7 @@ const sizesStyle = StyleSheet.create({
   },
   Body: {
     fontSize: 17,
-  }
+  },
 });
 
 const variantsStyle = StyleSheet.create({
@@ -34,10 +32,17 @@ const variantsStyle = StyleSheet.create({
   },
 });
 
-const OpenSansText: FC<Props> = ({children, variant = "Regular", size, style}) => {
+const OpenSansText: FC<Props> = ({
+  children,
+  variant = 'Regular',
+  size,
+  style,
+}) => {
   return (
-    <Text style={[sizesStyle[size], variantsStyle[variant], style]}>{children}</Text>
+    <Text style={[sizesStyle[size], variantsStyle[variant], style]}>
+      {children}
+    </Text>
   );
 };
 
-export default OpenSansText
+export default OpenSansText;

@@ -26,7 +26,7 @@ const Button: FC<ButtonProps> = (props) => {
     <Pressable style={({pressed}) => pressed ? [styles.button, styles.pressed] : styles.button} {...props}>
       <Text style={styles.text}>{props.title}</Text>
     </Pressable>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;

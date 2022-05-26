@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpenSansText /> renders correctly 1`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "fontSize": 17,
+      },
+      Object {
+        "fontFamily": "OpenSans-Bold",
+      },
+      undefined,
+    ]
+  }
+>
+  Test
+</Text>
+`;
+
+exports[`<OpenSansText /> renders correctly without variant 1`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "fontSize": 17,
+      },
+      Object {
+        "fontFamily": "OpenSans-Regular",
+      },
+      undefined,
+    ]
+  }
+>
+  Test
+</Text>
+`;
