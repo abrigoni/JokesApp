@@ -11,7 +11,7 @@ const useJokes = () => {
   const [activeJokes, setActiveJokes] = useState<Joke[]>([]);
   const [fetchMore, setFetchMore] = useState(false);
 
-  const handleFetch = useCallback(async () => {
+  const handleFetch: () => void = useCallback(async () => {
     const newJokes: Joke[] = [];
     for (let i = 0; i <= 3; i++) {
       const response = await fetchJoke();

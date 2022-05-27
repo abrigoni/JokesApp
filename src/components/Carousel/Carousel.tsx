@@ -17,12 +17,7 @@ interface Props {
 
 const {width} = Dimensions.get('window');
 
-const Carousel: FC<Props> = ({
-  items,
-  renderItem,
-  updateIndex,
-  onFetchMore,
-}) => {
+const Carousel: FC<Props> = ({items, renderItem, updateIndex, onFetchMore}) => {
   const scrollX = React.useRef(new Animated.Value(0)).current;
   return (
     <View style={styles.carouselContainer}>
