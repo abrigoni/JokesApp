@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  row: {
+    flexDirection: 'row',
+  },
 });
 
 const JOKE_CARD_COLORS: string[] = [
@@ -77,7 +80,7 @@ const Home: FC<Props> = ({navigation}) => {
     navigation.setOptions({
       headerRight: () => (
         <Pressable
-          style={{flexDirection: 'row'}}
+          style={styles.row}
           onPress={() => navigation.navigate(SAVED_JOKES_ROUTE)}>
           <OpenSansText size="Body" variant="Bold">
             Saved: {savedJokes.length}{' '}
