@@ -1,5 +1,5 @@
-import React, { createContext, FC, useState } from "react";
-import { Joke } from "../types/Joke";
+import React, {createContext, FC, useState} from 'react';
+import {Joke} from '../types/Joke';
 
 interface ContextProps {
   savedJokes: Joke[];
@@ -23,18 +23,21 @@ const AppContextProvider: FC = ({children}) => {
   };
 
   const removeJoke = (id: string) => {
-    setSavedJokes((jokes: Joke[]) => jokes.filter((joke: Joke) => joke.id !== id));
+    setSavedJokes((jokes: Joke[]) =>
+      jokes.filter((joke: Joke) => joke.id !== id),
+    );
   };
 
   return (
-    <AppContext.Provider value={{
-      savedJokes,
-      removeJoke,
-      saveJoke
-    }}>
+    <AppContext.Provider
+      value={{
+        savedJokes,
+        removeJoke,
+        saveJoke,
+      }}>
       {children}
     </AppContext.Provider>
-  )
+  );
 };
 
-export default AppContextProvider
+export default AppContextProvider;

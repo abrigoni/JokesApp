@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
-import { Pressable, Text, StyleSheet, ButtonProps } from 'react-native';
-import { Colors } from '../../utils/colors';
+import React, {FC} from 'react';
+import {Pressable, Text, StyleSheet, ButtonProps} from 'react-native';
+import {Colors} from '../../utils/colors';
 
 const styles = StyleSheet.create({
   button: {
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   pressed: {
-    opacity: .25,
+    opacity: 0.25,
   },
   text: {
     fontSize: 18,
@@ -21,9 +21,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const Button: FC<ButtonProps> = (props) => {
+const Button: FC<ButtonProps> = props => {
   return (
-    <Pressable style={({pressed}) => pressed ? [styles.button, styles.pressed] : styles.button} {...props}>
+    <Pressable
+      style={({pressed}) =>
+        pressed ? [styles.button, styles.pressed] : styles.button
+      }
+      {...props}>
       <Text style={styles.text}>{props.title}</Text>
     </Pressable>
   );

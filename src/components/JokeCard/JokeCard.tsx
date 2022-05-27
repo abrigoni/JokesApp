@@ -1,9 +1,17 @@
-import React, { FC } from 'react'
-import { Animated, StyleSheet, Text, StyleProp, ViewStyle, Dimensions, View, Platform } from 'react-native';
-import { Colors } from '../../utils/colors';
+import React, {FC} from 'react';
+import {
+  Animated,
+  StyleSheet,
+  Text,
+  StyleProp,
+  ViewStyle,
+  Dimensions,
+  View,
+  Platform,
+} from 'react-native';
+import {Colors} from '../../utils/colors';
 
-const { width } = Dimensions.get('window');
-
+const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   card: {
@@ -27,7 +35,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontFamily: Platform.select({
       ios: 'IndieFlower',
-      android: 'IndieFlower-Regular'
+      android: 'IndieFlower-Regular',
     }),
     color: Colors.white,
   },
@@ -47,27 +55,35 @@ interface Props {
   titleStyle?: any;
   authorStyle?: any;
   BottomIcon?: any;
-};
+}
 
-const JokeCard: FC<Props> = ({content, style, backgroundColor, titleStyle, authorStyle, BottomIcon = undefined}) => {
-  
+const JokeCard: FC<Props> = ({
+  content,
+  style,
+  backgroundColor,
+  titleStyle,
+  authorStyle,
+  BottomIcon = undefined,
+}) => {
   const renderBottom = () => {
-    if (!!!BottomIcon) {
+    if (!BottomIcon) {
       return <Text style={[styles.author, authorStyle]}>@designhumor</Text>;
     }
     return (
       <View style={styles.bottom}>
-        <Text style={[styles.author, authorStyle, styles.authorWithIcon]}>@designhumor</Text>
+        <Text style={[styles.author, authorStyle, styles.authorWithIcon]}>
+          @designhumor
+        </Text>
         {BottomIcon}
       </View>
-    )
+    );
   };
   return (
     <Animated.View style={[styles.card, style, {backgroundColor}]}>
       <Text style={[styles.text, titleStyle]}>{content}</Text>
       {renderBottom()}
     </Animated.View>
-  )
-}
+  );
+};
 
-export default JokeCard
+export default JokeCard;

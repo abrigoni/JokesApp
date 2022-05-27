@@ -42,5 +42,4 @@ const Indicator = ({scrollX, itemsQty}: {scrollX: any; itemsQty: number}) => {
   );
 };
 
-
-export default Indicator
+export default Indicator;

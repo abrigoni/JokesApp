@@ -1,1 +1,1 @@
-export { default } from './JokeCard';
+export {default} from './JokeCard';

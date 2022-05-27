@@ -3,7 +3,7 @@ import AppContextProvider from './context/AppContext';
 import {ApolloProvider} from '@apollo/client';
 import {client} from './graphql/client';
 import AppNavigator from './navigation/AppNavigator';
-import { NavigationContainer } from "@react-navigation/native";
+import {NavigationContainer} from '@react-navigation/native';
 
 const App = () => {
   return (

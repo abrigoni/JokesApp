@@ -1,14 +1,14 @@
-import React, { FC, useContext, useLayoutEffect } from 'react'
-import { Text, View, StyleSheet, Dimensions, FlatList } from 'react-native'
+import React, {FC, useContext, useLayoutEffect} from 'react';
+import {Text, View, StyleSheet, Dimensions, FlatList} from 'react-native';
 import IconButton from '../components/IconButton';
 import JokeCard from '../components/JokeCard';
-import { OpenSansText } from '../components/Typography';
-import { AppContext } from '../context/AppContext';
-import { Colors } from '../utils/colors';
+import {OpenSansText} from '../components/Typography';
+import {AppContext} from '../context/AppContext';
+import {Colors} from '../utils/colors';
 
-export const SAVED_JOKES_ROUTE = "SavedJokes";
+export const SAVED_JOKES_ROUTE = 'SavedJokes';
 
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   screen: {
@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   fallbackText: {
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 
 interface Props {
@@ -36,10 +36,14 @@ interface Props {
 }
 
 const SavedJokes: FC<Props> = ({navigation}) => {
-  const { savedJokes, removeJoke } = useContext(AppContext);
+  const {savedJokes, removeJoke} = useContext(AppContext);
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => <OpenSansText size="Body" variant="Bold">{savedJokes.length}</OpenSansText>,
+      headerRight: () => (
+        <OpenSansText size="Body" variant="Bold">
+          {savedJokes.length}
+        </OpenSansText>
+      ),
     });
   }, [navigation, savedJokes]);
 
@@ -57,21 +61,25 @@ const SavedJokes: FC<Props> = ({navigation}) => {
         <FlatList
           data={savedJokes}
           numColumns={2}
-          renderItem={({ item }) => (
-              <JokeCard
-                content={item.joke}
-                backgroundColor={Colors.orange}
-                style={styles.card}
-                titleStyle={styles.title}
-                authorStyle={styles.author}
-                BottomIcon={<IconButton iconProps={{name: 'trash', size: 20,}} onPress={handleDelete.bind(this, item.id)} />}
-              />
-            )
-          }
+          renderItem={({item}) => (
+            <JokeCard
+              content={item.joke}
+              backgroundColor={Colors.orange}
+              style={styles.card}
+              titleStyle={styles.title}
+              authorStyle={styles.author}
+              BottomIcon={
+                <IconButton
+                  iconProps={{name: 'trash', size: 20}}
+                  onPress={handleDelete.bind(this, item.id)}
+                />
+              }
+            />
+          )}
         />
       )}
     </View>
-  )
-}
+  );
+};
 
-export default SavedJokes
+export default SavedJokes;
