@@ -1,0 +1,261 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SavedJokes /> renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "paddingHorizontal": 37.5,
+      "paddingVertical": 24,
+    }
+  }
+>
+  <RCTScrollView
+    data={
+      Array [
+        Object {
+          "id": "1",
+          "joke": "Test",
+        },
+        Object {
+          "id": "2",
+          "joke": "Test 2",
+        },
+      ]
+    }
+    getItem={[Function]}
+    getItemCount={[Function]}
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    viewabilityConfigCallbackPairs={Array []}
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#f39c12",
+                "borderRadius": 8,
+                "flex": 1,
+                "height": 333.5,
+                "justifyContent": "space-between",
+                "margin": 10,
+                "marginHorizontal": 20,
+                "paddingBottom": 30,
+                "paddingHorizontal": 20,
+                "paddingTop": 80,
+                "width": 600,
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#ecf0f1",
+                    "fontFamily": "OpenSans-Bold",
+                    "fontSize": 24,
+                    "textAlign": "center",
+                  },
+                  Object {
+                    "fontSize": 12,
+                  },
+                ]
+              }
+            >
+              Test
+            </Text>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "color": "#ecf0f1",
+                      "fontFamily": "IndieFlower",
+                      "fontSize": 22,
+                    },
+                    Object {
+                      "fontSize": 16,
+                    },
+                    Object {
+                      "marginRight": 8,
+                    },
+                  ]
+                }
+              >
+                @designhumor
+              </Text>
+              <View
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+              >
+                <Text
+                  allowFontScaling={false}
+                  selectable={false}
+                  style={
+                    Array [
+                      Object {
+                        "color": undefined,
+                        "fontSize": 20,
+                      },
+                      undefined,
+                      Object {
+                        "fontFamily": "FontAwesome",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      Object {},
+                    ]
+                  }
+                >
+                  
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#f39c12",
+                "borderRadius": 8,
+                "flex": 1,
+                "height": 333.5,
+                "justifyContent": "space-between",
+                "margin": 10,
+                "marginHorizontal": 20,
+                "paddingBottom": 30,
+                "paddingHorizontal": 20,
+                "paddingTop": 80,
+                "width": 600,
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#ecf0f1",
+                    "fontFamily": "OpenSans-Bold",
+                    "fontSize": 24,
+                    "textAlign": "center",
+                  },
+                  Object {
+                    "fontSize": 12,
+                  },
+                ]
+              }
+            >
+              Test 2
+            </Text>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "color": "#ecf0f1",
+                      "fontFamily": "IndieFlower",
+                      "fontSize": 22,
+                    },
+                    Object {
+                      "fontSize": 16,
+                    },
+                    Object {
+                      "marginRight": 8,
+                    },
+                  ]
+                }
+              >
+                @designhumor
+              </Text>
+              <View
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+              >
+                <Text
+                  allowFontScaling={false}
+                  selectable={false}
+                  style={
+                    Array [
+                      Object {
+                        "color": undefined,
+                        "fontSize": 20,
+                      },
+                      undefined,
+                      Object {
+                        "fontFamily": "FontAwesome",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      Object {},
+                    ]
+                  }
+                >
+                  
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
