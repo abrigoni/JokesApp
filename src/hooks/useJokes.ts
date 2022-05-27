@@ -38,7 +38,7 @@ const useJokes = () => {
       handleFetch();
       setFetchMore(false);
     }
-  }, [fetchMore]);
+  }, [fetchMore, handleFetch]);
 
   return {
     activeJokes,

@@ -22,7 +22,6 @@ const Carousel: FC<Props> = ({
   renderItem,
   updateIndex,
   onFetchMore,
-  onFetchBack,
 }) => {
   const scrollX = React.useRef(new Animated.Value(0)).current;
   return (

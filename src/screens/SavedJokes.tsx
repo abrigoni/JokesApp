@@ -1,5 +1,5 @@
 import React, {FC, useContext, useLayoutEffect} from 'react';
-import {Text, View, StyleSheet, Dimensions, FlatList} from 'react-native';
+import {View, StyleSheet, Dimensions, FlatList} from 'react-native';
 import IconButton from '../components/IconButton';
 import JokeCard from '../components/JokeCard';
 import {OpenSansText} from '../components/Typography';

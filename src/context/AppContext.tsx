@@ -9,8 +9,8 @@ interface ContextProps {
 
 export const AppContext = createContext<ContextProps>({
   savedJokes: [],
-  saveJoke: (joke: Joke) => {},
-  removeJoke: (id: string) => {},
+  saveJoke: (_joke: Joke) => {},
+  removeJoke: (_id: string) => {},
 });
 
 const AppContextProvider: FC = ({children}) => {
