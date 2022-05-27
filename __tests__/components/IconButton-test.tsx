@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import IconButton from '../../../src/components/IconButton';
+import IconButton from '../../src/components/IconButton';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';

@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import {OpenSansText} from '../../../src/components/Typography';
+import {OpenSansText} from '../../src/components/Typography';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';

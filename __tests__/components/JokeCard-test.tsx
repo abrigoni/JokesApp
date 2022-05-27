@@ -1,11 +1,11 @@
 import 'react-native';
 import React from 'react';
-import JokeCard from '../../../src/components/JokeCard';
+import JokeCard from '../../src/components/JokeCard';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import IconButton from '../../../src/components/IconButton';
+import IconButton from '../../src/components/IconButton';
 
 jest.mock('react-native-vector-icons/FontAwesome', () => 'Icon');
 
