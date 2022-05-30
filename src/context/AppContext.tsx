@@ -1,4 +1,5 @@
 import React, {createContext, FC, useState} from 'react';
+import { realm_saveJoke } from '../realm/db';
 import {Joke} from '../types/Joke';
 
 interface ContextProps {
@@ -19,6 +20,7 @@ const AppContextProvider: FC = ({children}) => {
   const saveJoke = (joke: Joke) => {
     if (!savedJokes.includes(joke)) {
       setSavedJokes((jokes: Joke[]) => [...jokes, joke]);
+      realm_saveJoke(joke);
     }
   };
 

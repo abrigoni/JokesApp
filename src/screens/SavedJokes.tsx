@@ -1,9 +1,10 @@
-import React, {FC, useContext, useLayoutEffect} from 'react';
+import React, {FC, useContext, useEffect, useLayoutEffect} from 'react';
 import {View, StyleSheet, Dimensions, FlatList} from 'react-native';
 import IconButton from '../components/IconButton';
 import JokeCard from '../components/JokeCard';
 import {OpenSansText} from '../components/Typography';
 import {AppContext} from '../context/AppContext';
+import { realm_readJokes } from '../realm/db';
 import {Colors} from '../utils/colors';
 
 export const SAVED_JOKES_ROUTE = 'SavedJokes';
@@ -16,15 +17,23 @@ const styles = StyleSheet.create({
     paddingVertical: 24,
     paddingHorizontal: width * 0.05,
   },
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   card: {
     height: height * 0.25,
     margin: 10,
+    paddingTop: 30,
+    paddingBottom: 10,
+    maxWidth: width * 0.4,
   },
   title: {
     fontSize: 12,
   },
   author: {
-    fontSize: 16,
+    fontSize: 14,
   },
   fallbackText: {
     textAlign: 'center',
@@ -51,12 +60,21 @@ const SavedJokes: FC<Props> = ({navigation}) => {
     removeJoke(id);
   };
 
+  useEffect(() => {
+    const readJokesRealm = async () => {
+      const jokes = await realm_readJokes();
+      // console.log('jokes', jokes.length);
+    };
+    readJokesRealm();
+  }, []);
   return (
     <View style={styles.screen}>
       {savedJokes.length === 0 ? (
-        <OpenSansText style={styles.fallbackText} size="H2" variant="Regular">
-          Nothing saved 😭
-        </OpenSansText>
+        <View style={styles.center}>
+          <OpenSansText style={styles.fallbackText} size="H2" variant="Regular">
+            Nothing saved 😭
+          </OpenSansText>
+        </View>
       ) : (
         <FlatList
           data={savedJokes}
