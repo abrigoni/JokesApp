@@ -1,11 +1,84 @@
 import React from 'react'
-import {render} from '@testing-library/react-native'
-import '@testing-library/jest-dom'
+import { Pressable, Text } from "react-native";
 import AppContextProvider, { AppContext } from '../../src/context/AppContext';
+// Note: test renderer must be required after react-native.
+import renderer from 'react-test-renderer';
+import { fireEvent, render } from "@testing-library/react-native";
 
+const mockJoke = {
+  id: '1',
+  joke: 'Joke',
+  permalink: '1',
+}
 
 describe('App Context', () => {
-  test('Default state', () => {
-
+  test('Renders correctly', () => {
+    const component = renderer.create(
+      <AppContextProvider>
+        <AppContext.Consumer>
+          {value => (
+            <>
+              <Text>Loading:{value.savedJokes.length}</Text>
+            </>
+          )}
+        </AppContext.Consumer>
+      </AppContextProvider>
+    );
+    expect(component.toJSON()).toMatchSnapshot();
   });
+  test('Default state on savedJokes', () => {
+    const {getByText} = render(
+      <AppContextProvider>
+        <AppContext.Consumer>
+          {value => <Text>savedJokes: {value.savedJokes.length}</Text>}
+        </AppContext.Consumer>
+      </AppContextProvider>
+    );
+    expect(getByText('savedJokes: 0')).toBeTruthy();
+  });
+  test('saveJoke function updates savedJokes correctly', () => {
+    const {getByTestId, getByText} = render(
+      <AppContextProvider>
+        <AppContext.Consumer>
+          {value => (
+            <>
+              <Text>savedJokes: {value.savedJokes.length}</Text>
+              <Pressable onPress={value.saveJoke.bind(this, mockJoke)} testID={'press-save'}>
+                <Text>Press Save</Text>
+              </Pressable>
+            </>
+          )}
+        </AppContext.Consumer>
+      </AppContextProvider>
+    );
+    expect(getByText('savedJokes: 0')).toBeTruthy();
+    fireEvent(getByTestId('press-save'), 'press');
+    expect(getByText('savedJokes: 1')).toBeTruthy();
+  });
+
+  test('removeJoke function updates savedJokes correctly', () => {
+    const {getByText, getByTestId} = render(
+      <AppContextProvider>
+        <AppContext.Consumer>
+          {value => (
+            <>
+              <Text>savedJokes: {value.savedJokes.length}</Text>
+              <Pressable onPress={value.saveJoke.bind(this, mockJoke)} testID={'press-save'}>
+                <Text>Press Save</Text>
+              </Pressable>
+              <Pressable onPress={value.removeJoke.bind(this, '1')} testID={'press-delete'}>
+                <Text>Press Delete</Text>
+              </Pressable>
+            </>
+          )}
+        </AppContext.Consumer>
+      </AppContextProvider>
+    );
+    expect(getByText('savedJokes: 0')).toBeTruthy();
+    fireEvent(getByTestId('press-save'), 'press');
+    expect(getByText('savedJokes: 1')).toBeTruthy();
+    fireEvent(getByTestId('press-delete'), 'press');
+    expect(getByText('savedJokes: 0')).toBeTruthy();
+  });
+
 });

@@ -4,6 +4,8 @@ import {MockedProvider} from '@apollo/client/testing';
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
 import { FETCH_JOKE } from "../../src/graphql/queries";
+import { fireEvent, render } from "@testing-library/react-native";
+import { AppContext } from "../../src/context/AppContext";
 
 const navigation = {
   setOptions: jest.fn(),
@@ -19,7 +21,8 @@ const mocks: any[] = [
       data: {
         joke: {
           id: '1',
-          joke: 'Test'
+          joke: 'Test',
+          permalink: '1',
         },
       },
     },
@@ -36,13 +39,18 @@ describe('<Home />', () => {
     const json = renderer.create(component).toJSON();
     expect(json).toMatchSnapshot();
   });
-  test('saveJoke on context gets called', () => {
+  test('saveJoke on context gets called when clicking Save button', async () => {
+    const mockSaveJoke = jest.fn();
     const component = (
       <MockedProvider mocks={mocks}>
-        <Home navigation={navigation} />
+        <AppContext.Provider value={{savedJokes: [], removeJoke: jest.fn(), saveJoke: mockSaveJoke}}>
+          <Home navigation={navigation} />
+        </AppContext.Provider>
       </MockedProvider>
     );
-    const json = renderer.create(component).toJSON();
-    expect(json).toMatchSnapshot();
+    const { getByText } = await render(component);
+    const toClick = await getByText('Save');
+    fireEvent.press(toClick);
+    expect(mockSaveJoke).toHaveBeenCalledTimes(1);
   });
 });
