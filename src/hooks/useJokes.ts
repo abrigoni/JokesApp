@@ -9,7 +9,6 @@ const useJokes = () => {
   });
   const [jokes, setJokes] = useState<Joke[]>([]);
   const [activeJokes, setActiveJokes] = useState<Joke[]>([]);
-  const [fetchMore, setFetchMore] = useState(false);
 
   const handleFetch: () => void = useCallback(async () => {
     const newJokes: Joke[] = [];
@@ -28,22 +27,14 @@ const useJokes = () => {
     handleFetch();
   }, []);
 
-  const triggerFetchMore = useCallback(() => {
-    setFetchMore(true);
-    setActiveJokes([]);
-  }, [setFetchMore]);
-
-  useEffect(() => {
-    if (fetchMore) {
-      handleFetch();
-      setFetchMore(false);
-    }
-  }, [fetchMore, handleFetch]);
+  const fetchMore = useCallback(() => {
+    handleFetch();
+  }, []);
 
   return {
     activeJokes,
     loading: loading || activeJokes.length < 4,
-    triggerFetchMore,
+    triggerFetchMore: fetchMore,
   };
 };
 
