@@ -22,6 +22,7 @@ const Carousel: FC<Props> = ({items, renderItem, updateIndex, onFetchMore}) => {
   return (
     <View style={styles.carouselContainer}>
       <Animated.FlatList
+        testID={'flat-list'}
         data={items}
         renderItem={renderItem.bind(this, scrollX)}
         horizontal
@@ -29,14 +30,16 @@ const Carousel: FC<Props> = ({items, renderItem, updateIndex, onFetchMore}) => {
         scrollEventThrottle={32}
         onScroll={Animated.event(
           [{nativeEvent: {contentOffset: {x: scrollX}}}],
-          {useNativeDriver: false},
+          {
+            useNativeDriver: false,
+            listener: ({nativeEvent}) => {
+              const index = Math.ceil((nativeEvent as any).contentOffset.x / width);
+              if (updateIndex) {
+                updateIndex(index);
+              }
+            },
+          },
         )}
-        onMomentumScrollEnd={event => {
-          const index = Math.ceil(event.nativeEvent.contentOffset.x / width);
-          if (updateIndex) {
-            updateIndex(index);
-          }
-        }}
         pagingEnabled
         keyExtractor={(_, index) => index.toString()}
         onEndReached={() => {
