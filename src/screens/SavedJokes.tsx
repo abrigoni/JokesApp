@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingTop: 30,
     paddingBottom: 10,
-    maxWidth: width * 0.4,
+    maxWidth: width * 0.35,
   },
   title: {
     fontSize: 12,
@@ -63,7 +63,7 @@ const SavedJokes: FC<Props> = ({navigation}) => {
   useEffect(() => {
     const readJokesRealm = async () => {
       const jokes = await realm_readJokes();
-      // console.log('jokes', jokes.length);
+      console.log('jokes', jokes.length);
     };
     readJokesRealm();
   }, []);
