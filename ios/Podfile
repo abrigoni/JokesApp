@@ -19,6 +19,8 @@ target 'JokesApp' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'RealmJS', :path => '../node_modules/realm'
+
   target 'JokesAppTests' do
     inherit! :complete
     # Pods for testing
