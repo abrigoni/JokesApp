@@ -1,6 +1,7 @@
-import React, {createContext, FC, useState} from 'react';
-import { realm_saveJoke } from '../realm/db';
+import React, {createContext, FC, useEffect, useState} from 'react';
+import { JokeSchema, JOKE_SCHEMA_NAME } from '../realm/schemas';
 import {Joke} from '../types/Joke';
+import Realm from 'realm';
 
 interface ContextProps {
   savedJokes: Joke[];
@@ -15,7 +16,41 @@ export const AppContext = createContext<ContextProps>({
 });
 
 const AppContextProvider: FC = ({children}) => {
+  const [realm, setRealm] = useState<Realm>();
   const [savedJokes, setSavedJokes] = useState<Joke[]>([]);
+
+  console.log('realm', realm?.objects(JOKE_SCHEMA_NAME));
+  useEffect(() => {
+    const openRealm = async () => {
+      const r = await Realm.open({schema: [JokeSchema]});
+      if (r != null && !r.isClosed) {
+        setRealm(r);
+      }
+    };
+    openRealm();
+    return () => {
+      if (!!realm && !realm.isClosed) {
+        realm.close();
+      }
+    };
+  }, []);
+
+  const realm_saveJoke = (joke: Joke) => {
+    if (!!realm && !realm.isClosed) {
+      realm.write(() => {
+        realm.create(JOKE_SCHEMA_NAME, joke);
+      });
+    }
+  };
+
+  const realm_deleteJoke = (id: string) => {
+    if (!!realm && !realm.isClosed) {
+      realm.write(() => {
+        const joke = realm.objectForPrimaryKey<Joke>(JOKE_SCHEMA_NAME, id);
+        realm.delete(joke); 
+      });
+    }
+  }
 
   const saveJoke = (joke: Joke) => {
     if (!savedJokes.includes(joke)) {
@@ -28,6 +63,7 @@ const AppContextProvider: FC = ({children}) => {
     setSavedJokes((jokes: Joke[]) =>
       jokes.filter((joke: Joke) => joke.id !== id),
     );
+    realm_deleteJoke(id);
   };
 
   return (

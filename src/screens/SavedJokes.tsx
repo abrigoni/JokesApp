@@ -4,7 +4,6 @@ import IconButton from '../components/IconButton';
 import JokeCard from '../components/JokeCard';
 import {OpenSansText} from '../components/Typography';
 import {AppContext} from '../context/AppContext';
-import { realm_readJokes } from '../realm/db';
 import {Colors} from '../utils/colors';
 
 export const SAVED_JOKES_ROUTE = 'SavedJokes';
@@ -59,14 +58,6 @@ const SavedJokes: FC<Props> = ({navigation}) => {
   const handleDelete = (id: string) => {
     removeJoke(id);
   };
-
-  useEffect(() => {
-    const readJokesRealm = async () => {
-      const jokes = await realm_readJokes();
-      console.log('jokes', jokes.length);
-    };
-    readJokesRealm();
-  }, []);
   return (
     <View style={styles.screen}>
       {savedJokes.length === 0 ? (
