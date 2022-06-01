@@ -6,6 +6,7 @@ import {
   Dimensions,
   Pressable,
   ActivityIndicator,
+  Animated,
 } from 'react-native';
 import {JOKE_CARD_COLORS} from '../utils/colors';
 import JokeCard from '../components/JokeCard';

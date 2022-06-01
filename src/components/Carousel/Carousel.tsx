@@ -7,9 +7,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-interface Props {
+interface CarouselProps {
   items: any[];
-  renderItem: any;
+  renderItem: (scrollX: Animated.Value, item: any) => JSX.Element;
   updateIndex?: (number: number) => void;
   onFetchMore?: () => void;
   onFetchBack?: () => void;
@@ -17,7 +17,7 @@ interface Props {
 
 const {width} = Dimensions.get('window');
 
-const Carousel: FC<Props> = ({items, renderItem, updateIndex, onFetchMore}) => {
+const Carousel = ({items, renderItem, updateIndex, onFetchMore}: CarouselProps) => {
   const scrollX = React.useRef(new Animated.Value(0)).current;
   return (
     <View style={styles.carouselContainer}>
