@@ -2,13 +2,12 @@ import React, {FC, useContext, useLayoutEffect, useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  Text,
   View,
   Dimensions,
   Pressable,
   ActivityIndicator,
 } from 'react-native';
-import {Colors} from '../utils/colors';
+import {JOKE_CARD_COLORS} from '../utils/colors';
 import JokeCard from '../components/JokeCard';
 import Button from '../components/Button';
 import Carousel from '../components/Carousel';
@@ -18,6 +17,8 @@ import {SAVED_JOKES_ROUTE} from './SavedJokes';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Joke} from '../types/Joke';
 import useJokes from '../hooks/useJokes';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AppNavigatorStackParamList } from '../navigation/types';
 
 const {width} = Dimensions.get('window');
 
@@ -31,8 +32,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: width * 0.05,
   },
   title: {
-    fontFamily: 'OpenSans-Bold',
-    fontSize: 34,
     color: 'black',
     textAlign: 'center',
   },
@@ -51,12 +50,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const JOKE_CARD_COLORS: string[] = [
-  Colors.purple,
-  Colors.orange,
-  Colors.red,
-  Colors.green,
-];
+
 
 const renderJokeItem = (scrollX: any, {item}: {item: Joke}) => {
   const backgroundColor = scrollX.interpolate({
@@ -68,11 +62,9 @@ const renderJokeItem = (scrollX: any, {item}: {item: Joke}) => {
 
 export const HOME_ROUTE = 'Home';
 
-interface Props {
-  navigation: any;
-}
+type HomeProps = NativeStackScreenProps<AppNavigatorStackParamList>;
 
-const Home: FC<Props> = ({navigation}) => {
+const Home: FC<HomeProps> = ({navigation}) => {
   const {activeJokes, loading, triggerFetchMore} = useJokes();
   const {saveJoke, savedJokes} = useContext(AppContext);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -107,9 +99,9 @@ const Home: FC<Props> = ({navigation}) => {
     <SafeAreaView style={styles.screen}>
       <View style={styles.screenContent}>
         <View>
-          <Text style={styles.title}>
+          <OpenSansText style={styles.title} size="H1" variant="Bold">
             Things you can say to annoy designers.
-          </Text>
+          </OpenSansText>
         </View>
         {loading ? (
           <View style={styles.loading}>

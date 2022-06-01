@@ -4,6 +4,7 @@ import AppContextProvider, { AppContext } from '../../src/context/AppContext';
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
 import { fireEvent, render } from "@testing-library/react-native";
+import { OpenSansText } from '../../src/components/Typography';
 
 const mockJoke = {
   id: '1',
@@ -18,7 +19,7 @@ describe('App Context', () => {
         <AppContext.Consumer>
           {value => (
             <>
-              <Text>Loading:{value.savedJokes.length}</Text>
+              <OpenSansText>Loading:{value.savedJokes.length}</OpenSansText>
             </>
           )}
         </AppContext.Consumer>
@@ -30,7 +31,7 @@ describe('App Context', () => {
     const {getByText} = render(
       <AppContextProvider>
         <AppContext.Consumer>
-          {value => <Text>savedJokes: {value.savedJokes.length}</Text>}
+          {value => <OpenSansText>savedJokes: {value.savedJokes.length}</OpenSansText>}
         </AppContext.Consumer>
       </AppContextProvider>
     );
@@ -42,9 +43,9 @@ describe('App Context', () => {
         <AppContext.Consumer>
           {value => (
             <>
-              <Text>savedJokes: {value.savedJokes.length}</Text>
+              <OpenSansText>savedJokes: {value.savedJokes.length}</OpenSansText>
               <Pressable onPress={value.saveJoke.bind(this, mockJoke)} testID={'press-save'}>
-                <Text>Press Save</Text>
+                <OpenSansText>Press Save</OpenSansText>
               </Pressable>
             </>
           )}
@@ -62,12 +63,12 @@ describe('App Context', () => {
         <AppContext.Consumer>
           {value => (
             <>
-              <Text>savedJokes: {value.savedJokes.length}</Text>
+              <OpenSansText>savedJokes: {value.savedJokes.length}</OpenSansText>
               <Pressable onPress={value.saveJoke.bind(this, mockJoke)} testID={'press-save'}>
-                <Text>Press Save</Text>
+                <OpenSansText>Press Save</OpenSansText>
               </Pressable>
               <Pressable onPress={value.removeJoke.bind(this, '1')} testID={'press-delete'}>
-                <Text>Press Delete</Text>
+                <OpenSansText>Press Delete</OpenSansText>
               </Pressable>
             </>
           )}

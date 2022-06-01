@@ -5,3 +5,10 @@ export const Colors = {
   orange: '#f39c12',
   green: '#27ae60',
 };
+
+export const JOKE_CARD_COLORS: string[] = [
+  Colors.purple,
+  Colors.orange,
+  Colors.red,
+  Colors.green,
+];

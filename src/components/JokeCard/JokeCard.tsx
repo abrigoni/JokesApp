@@ -1,15 +1,16 @@
-import React, {FC} from 'react';
+import React from 'react';
 import {
   Animated,
   StyleSheet,
   Text,
-  StyleProp,
   ViewStyle,
   Dimensions,
   View,
   Platform,
+  TextStyle,
 } from 'react-native';
 import {Colors} from '../../utils/colors';
+import { OpenSansText } from '../Typography';
 
 const {width} = Dimensions.get('window');
 
@@ -27,8 +28,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: Colors.white,
-    fontSize: 24,
-    fontFamily: 'OpenSans-Bold',
     textAlign: 'center',
   },
   author: {
@@ -48,23 +47,23 @@ const styles = StyleSheet.create({
   },
 });
 
-interface Props {
+interface JokeCardProps {
   content: string;
   backgroundColor: string;
-  style?: StyleProp<ViewStyle>;
-  titleStyle?: any;
-  authorStyle?: any;
-  BottomIcon?: any;
+  style?: ViewStyle;
+  titleStyle?: TextStyle;
+  authorStyle?: TextStyle;
+  BottomIcon?: React.ReactNode;
 }
 
-const JokeCard: FC<Props> = ({
+const JokeCard = ({
   content,
   style,
   backgroundColor,
   titleStyle,
   authorStyle,
   BottomIcon = undefined,
-}) => {
+}: JokeCardProps) => {
   const renderBottom = () => {
     if (!BottomIcon) {
       return <Text style={[styles.author, authorStyle]}>@designhumor</Text>;
@@ -80,7 +79,7 @@ const JokeCard: FC<Props> = ({
   };
   return (
     <Animated.View style={[styles.card, style, {backgroundColor}]}>
-      <Text style={[styles.text, titleStyle]}>{content}</Text>
+      <OpenSansText style={[styles.text, titleStyle]} variant="Bold" size="H2">{content}</OpenSansText>
       {renderBottom()}
     </Animated.View>
   );

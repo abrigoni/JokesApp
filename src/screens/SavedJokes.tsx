@@ -1,9 +1,11 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, {FC, useContext, useEffect, useLayoutEffect} from 'react';
 import {View, StyleSheet, Dimensions, FlatList} from 'react-native';
 import IconButton from '../components/IconButton';
 import JokeCard from '../components/JokeCard';
 import {OpenSansText} from '../components/Typography';
 import {AppContext} from '../context/AppContext';
+import { AppNavigatorStackParamList } from '../navigation/types';
 import {Colors} from '../utils/colors';
 
 export const SAVED_JOKES_ROUTE = 'SavedJokes';
@@ -39,11 +41,9 @@ const styles = StyleSheet.create({
   },
 });
 
-interface Props {
-  navigation: any; // todo
-}
+type SavedJokesProps = NativeStackScreenProps<AppNavigatorStackParamList>;
 
-const SavedJokes: FC<Props> = ({navigation}) => {
+const SavedJokes: FC<SavedJokesProps> = ({navigation}) => {
   const {savedJokes, removeJoke} = useContext(AppContext);
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -79,7 +79,8 @@ const SavedJokes: FC<Props> = ({navigation}) => {
               authorStyle={styles.author}
               BottomIcon={
                 <IconButton
-                  iconProps={{name: 'trash', size: 20}}
+                  name='trash'
+                  size={20}
                   onPress={handleDelete.bind(this, item.id)}
                 />
               }

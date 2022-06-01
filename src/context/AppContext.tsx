@@ -15,7 +15,7 @@ export const AppContext = createContext<ContextProps>({
   removeJoke: (_id: string) => {},
 });
 
-const AppContextProvider: FC = ({children}) => {
+const AppContextProvider = ({children}: {children: React.ReactNode}) => {
   const [realm, setRealm] = useState<Realm>();
   const [savedJokes, setSavedJokes] = useState<Joke[]>([]);
 
