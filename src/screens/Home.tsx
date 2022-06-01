@@ -81,7 +81,8 @@ const Home: FC<Props> = ({navigation}) => {
       headerRight: () => (
         <Pressable
           style={styles.row}
-          onPress={() => navigation.navigate(SAVED_JOKES_ROUTE)}>
+          onPress={() => navigation.navigate(SAVED_JOKES_ROUTE)}
+        >
           <OpenSansText size="Body" variant="Bold">
             Saved: {savedJokes.length}{' '}
           </OpenSansText>
