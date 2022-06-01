@@ -19,12 +19,16 @@ const AppContextProvider: FC = ({children}) => {
   const [realm, setRealm] = useState<Realm>();
   const [savedJokes, setSavedJokes] = useState<Joke[]>([]);
 
-  console.log('realm', realm?.objects(JOKE_SCHEMA_NAME));
+  // initial load on realm connection + savedJokes from DB
   useEffect(() => {
     const openRealm = async () => {
       const r = await Realm.open({schema: [JokeSchema]});
       if (r != null && !r.isClosed) {
         setRealm(r);
+        const result = r.objects<Joke>(JOKE_SCHEMA_NAME).map((value) => {
+          return value.toJSON() as Joke;
+        });
+        setSavedJokes(result);
       }
     };
     openRealm();
