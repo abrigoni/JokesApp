@@ -8,7 +8,7 @@ const useJokes = () => {
     fetchPolicy: 'network-only',
   });
   const [jokes, setJokes] = useState<Joke[]>([]);
-  const [activeJokes, setActiveJokes] = useState<Joke[]>([]);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const handleFetch: () => void = useCallback(async () => {
     const newJokes: Joke[] = [];
@@ -19,7 +19,6 @@ const useJokes = () => {
       }
     }
     setJokes([...jokes, ...newJokes]);
-    setActiveJokes(newJokes);
   }, [jokes, setJokes, fetchJoke]);
 
   // initial load
@@ -27,14 +26,21 @@ const useJokes = () => {
     handleFetch();
   }, []);
 
-  const fetchMore = useCallback(() => {
+  const fetchMore = () => {
+    setActiveIndex(activeIndex + 4);
     handleFetch();
-  }, []);
+  };
 
+  const fetchBack = () => {
+    if (activeIndex > 4) {
+      setActiveIndex(activeIndex - 4);
+    }
+  };
   return {
-    activeJokes,
-    loading: loading || activeJokes.length < 4,
+    activeJokes: jokes.slice(activeIndex, activeIndex + 4),
+    loading: loading || jokes.length % 4 !== 0,
     triggerFetchMore: fetchMore,
+    triggerFetchBack: fetchBack,
   };
 };
 
