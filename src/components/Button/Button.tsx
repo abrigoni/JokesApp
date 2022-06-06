@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, Text, StyleSheet, ButtonProps} from 'react-native';
+import {Pressable, Text, StyleSheet, ButtonProps, ViewStyle} from 'react-native';
 import {Colors} from '../../utils/colors';
 import { OpenSansText } from '../Typography';
 
@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const Button = (props: ButtonProps) => {
+const Button = ({style, ...props}: ButtonProps & { style: ViewStyle}) => {
   return (
     <Pressable
       style={({pressed}) =>
-        pressed ? [styles.button, styles.pressed] : styles.button
+        pressed ? [styles.button, styles.pressed, style] : [styles.button, style]
       }
       {...props}>
       <OpenSansText style={styles.text} variant="SemiBold">{props.title}</OpenSansText>
