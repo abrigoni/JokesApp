@@ -18,7 +18,7 @@ interface CarouselProps {
 
 const {width} = Dimensions.get('window');
 
-const Carousel = ({items, renderItem, updateIndex, onFetchMore}: CarouselProps) => {
+const Carousel = ({items, renderItem, updateIndex, onFetchMore, onFetchBack}: CarouselProps) => {
   const scrollX = React.useRef(new Animated.Value(0)).current;
   return (
     <View style={styles.container}>
@@ -41,14 +41,17 @@ const Carousel = ({items, renderItem, updateIndex, onFetchMore}: CarouselProps) 
           },
         )}
         onMomentumScrollEnd={({nativeEvent}) => {
-          const index = Math.ceil((nativeEvent as any).contentOffset.x / width);
+          const index = Math.ceil(nativeEvent.contentOffset.x / width);
           if (updateIndex) {
             updateIndex(index);
           }
         }}
-        onEndReachedThreshold={0}
-        onEndReached={() => {
-          if (onFetchMore) {
+        onMomentumScrollBegin={({nativeEvent}) => {
+          const index = Math.abs(Math.ceil(nativeEvent.contentOffset.x / width));
+          if (index === 0 && onFetchBack) {
+            onFetchBack();
+          }
+          if (index === 4 && onFetchMore) {
             onFetchMore();
           }
         }}

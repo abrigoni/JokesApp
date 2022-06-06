@@ -108,6 +108,9 @@ const Home: FC<HomeProps> = ({navigation}) => {
     triggerFetchMore();
   };
 
+  const handleFetchBack = () => {
+    triggerFetchBack();
+  };
   const handleSave = () => {
     saveJoke(activeJokes[currentIndex]);
   };
@@ -130,6 +133,7 @@ const Home: FC<HomeProps> = ({navigation}) => {
               renderItem={renderJokeItem}
               updateIndex={handleChangeIndex}
               onFetchMore={handleFetchMore}
+              onFetchBack={handleFetchBack}
             />
           </View>
         )}
