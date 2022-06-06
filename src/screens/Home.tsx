@@ -1,4 +1,4 @@
-import React, {FC, useContext, useLayoutEffect, useState} from 'react';
+import React, {FC, useContext, useLayoutEffect, useRef, useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -30,11 +30,11 @@ const styles = StyleSheet.create({
   screenContent: {
     flex: 1,
     paddingBottom: 24,
-    paddingHorizontal: width * 0.05,
   },
   title: {
     color: 'black',
     textAlign: 'center',
+    paddingHorizontal: width * 0.05,
   },
   cardContainer: {
     marginVertical: 32,
@@ -49,16 +49,30 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
   },
+  buttonSpacing: {
+    marginHorizontal: width * 0.05,
+  },
 });
 
 
-
-const renderJokeItem = (scrollX: any, {item}: {item: Joke}) => {
+const renderJokeItem = (scrollX: Animated.Value, {item, index}: {item: Joke, index: number}) => {
   const backgroundColor = scrollX.interpolate({
     inputRange: JOKE_CARD_COLORS.map((_, i) => i * width),
     outputRange: JOKE_CARD_COLORS.map(bg => bg),
   });
-  return <JokeCard content={item.joke} backgroundColor={backgroundColor} />;
+  const inputRange = [
+    (index - 1) * width,
+    index * width,
+    (index + 1) * width,
+  ];
+  const outputRange = ['0deg', '0deg', '10deg'];
+  const translateX = scrollX.interpolate({inputRange, outputRange});
+  return (
+    <JokeCard
+      content={item.joke}
+      style={{transform: [{rotateZ: translateX}], backgroundColor}}
+    />
+  );
 };
 
 export const HOME_ROUTE = 'Home';
@@ -66,7 +80,7 @@ export const HOME_ROUTE = 'Home';
 type HomeProps = NativeStackScreenProps<AppNavigatorStackParamList>;
 
 const Home: FC<HomeProps> = ({navigation}) => {
-  const {activeJokes, loading, triggerFetchMore} = useJokes();
+  const {activeJokes, loading, triggerFetchMore, triggerFetchBack} = useJokes();
   const {saveJoke, savedJokes} = useContext(AppContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   useLayoutEffect(() => {
@@ -118,7 +132,7 @@ const Home: FC<HomeProps> = ({navigation}) => {
             />
           </View>
         )}
-        <Button title="Save" onPress={handleSave} />
+        <Button style={styles.buttonSpacing} title="Save" onPress={handleSave} />
       </View>
     </SafeAreaView>
   );

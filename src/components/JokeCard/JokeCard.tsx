@@ -3,7 +3,6 @@ import {
   Animated,
   StyleSheet,
   Text,
-  ViewStyle,
   Dimensions,
   View,
   Platform,
@@ -15,6 +14,11 @@ import { OpenSansText } from '../Typography';
 const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
+  cardContainer: {
+    width,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   card: {
     flex: 1,
     alignItems: 'center',
@@ -23,8 +27,7 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     paddingHorizontal: 20,
     borderRadius: 8,
-    marginHorizontal: 20,
-    width: width * 0.8,
+    width: width * 0.80,
   },
   text: {
     color: Colors.white,
@@ -49,8 +52,8 @@ const styles = StyleSheet.create({
 
 interface JokeCardProps {
   content: string;
-  backgroundColor: string;
-  style?: ViewStyle;
+  backgroundColor?: string;
+  style?: any;
   titleStyle?: TextStyle;
   authorStyle?: TextStyle;
   BottomIcon?: React.ReactNode;
@@ -59,7 +62,6 @@ interface JokeCardProps {
 const JokeCard = ({
   content,
   style,
-  backgroundColor,
   titleStyle,
   authorStyle,
   BottomIcon = undefined,
@@ -78,10 +80,12 @@ const JokeCard = ({
     );
   };
   return (
-    <Animated.View style={[styles.card, style, {backgroundColor}]}>
-      <OpenSansText style={[styles.text, titleStyle]} variant="Bold" size="H2">{content}</OpenSansText>
-      {renderBottom()}
-    </Animated.View>
+    <View style={styles.cardContainer}>
+      <Animated.View style={[styles.card, style]}>
+        <OpenSansText style={[styles.text, titleStyle]} variant="Bold" size="H2">{content}</OpenSansText>
+        {renderBottom()}
+      </Animated.View>
+    </View>
   );
 };
 

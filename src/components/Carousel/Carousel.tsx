@@ -24,9 +24,14 @@ const Carousel = ({items, renderItem, updateIndex, onFetchMore}: CarouselProps) 
       <Animated.FlatList
         testID={'flat-list'}
         data={items}
-        renderItem={renderItem.bind(this, scrollX)}
         horizontal
+        numColumns={1}
+        removeClippedSubviews
         showsHorizontalScrollIndicator={false}
+        snapToInterval={width}
+        decelerationRate={'fast'}
+        keyExtractor={(_, index) => index.toString()}
+        renderItem={renderItem.bind(this, scrollX)}
         scrollEventThrottle={32}
         onScroll={Animated.event(
           [{nativeEvent: {contentOffset: {x: scrollX}}}],
@@ -40,8 +45,7 @@ const Carousel = ({items, renderItem, updateIndex, onFetchMore}: CarouselProps) 
             },
           },
         )}
-        pagingEnabled
-        keyExtractor={(_, index) => index.toString()}
+        onEndReachedThreshold={0}
         onEndReached={() => {
           if (onFetchMore) {
             onFetchMore();
