@@ -36,9 +36,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingHorizontal: width * 0.05,
   },
-  cardContainer: {
+  carouselContainer: {
     marginVertical: 32,
     flex: 1,
+    overflow: 'visible',
   },
   loading: {
     flex: 1,
@@ -123,7 +124,7 @@ const Home: FC<HomeProps> = ({navigation}) => {
             <ActivityIndicator size="large" />
           </View>
         ) : (
-          <View style={styles.cardContainer}>
+          <View style={styles.carouselContainer}>
             <Carousel
               items={activeJokes}
               renderItem={renderJokeItem}

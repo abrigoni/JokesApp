@@ -3,8 +3,9 @@ import {View, StyleSheet, Animated, Dimensions, ListRenderItem} from 'react-nati
 import Indicator from './Indicator';
 
 const styles = StyleSheet.create({
-  carouselContainer: {
+  container: {
     flex: 1,
+    overflow: 'visible',
   },
 });
 interface CarouselProps {
@@ -20,7 +21,7 @@ const {width} = Dimensions.get('window');
 const Carousel = ({items, renderItem, updateIndex, onFetchMore}: CarouselProps) => {
   const scrollX = React.useRef(new Animated.Value(0)).current;
   return (
-    <View style={styles.carouselContainer}>
+    <View style={styles.container}>
       <Animated.FlatList
         testID={'flat-list'}
         data={items}
@@ -37,14 +38,14 @@ const Carousel = ({items, renderItem, updateIndex, onFetchMore}: CarouselProps) 
           [{nativeEvent: {contentOffset: {x: scrollX}}}],
           {
             useNativeDriver: false,
-            listener: ({nativeEvent}) => {
-              const index = Math.ceil((nativeEvent as any).contentOffset.x / width);
-              if (updateIndex) {
-                updateIndex(index);
-              }
-            },
           },
         )}
+        onMomentumScrollEnd={({nativeEvent}) => {
+          const index = Math.ceil((nativeEvent as any).contentOffset.x / width);
+          if (updateIndex) {
+            updateIndex(index);
+          }
+        }}
         onEndReachedThreshold={0}
         onEndReached={() => {
           if (onFetchMore) {

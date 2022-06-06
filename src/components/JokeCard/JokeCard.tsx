@@ -18,6 +18,12 @@ const styles = StyleSheet.create({
     width,
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'visible',
+  },
+  smallContainer: {
+    overflow: 'visible',
+    padding: 10,
+    flex: 1,
   },
   card: {
     flex: 1,
@@ -28,6 +34,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 8,
     width: width * 0.80,
+    overflow: 'visible',
   },
   text: {
     color: Colors.white,
@@ -64,6 +71,7 @@ const JokeCard = ({
   style,
   titleStyle,
   authorStyle,
+  backgroundColor,
   BottomIcon = undefined,
 }: JokeCardProps) => {
   const renderBottom = () => {
@@ -80,8 +88,8 @@ const JokeCard = ({
     );
   };
   return (
-    <View style={styles.cardContainer}>
-      <Animated.View style={[styles.card, style]}>
+    <View style={!BottomIcon ? styles.cardContainer : styles.smallContainer}>
+      <Animated.View style={[styles.card, {backgroundColor}, style]}>
         <OpenSansText style={[styles.text, titleStyle]} variant="Bold" size="H2">{content}</OpenSansText>
         {renderBottom()}
       </Animated.View>
