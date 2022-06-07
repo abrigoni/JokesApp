@@ -1,4 +1,4 @@
-import React, {FC, useCallback, useContext, useLayoutEffect, useRef, useState} from 'react';
+import React, {FC, useCallback, useContext, useLayoutEffect, useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 import {Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {IconProps} from 'react-native-vector-icons/Icon';

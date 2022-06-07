@@ -1,4 +1,4 @@
-import React, {createContext, FC, useEffect, useState} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 import { JokeSchema, JOKE_SCHEMA_NAME } from '../realm/schemas';
 import {Joke} from '../types/Joke';
 import Realm from 'realm';
@@ -51,7 +51,7 @@ const AppContextProvider = ({children}: {children: React.ReactNode}) => {
     if (!!realm && !realm.isClosed) {
       realm.write(() => {
         const joke = realm.objectForPrimaryKey<Joke>(JOKE_SCHEMA_NAME, id);
-        realm.delete(joke); 
+        realm.delete(joke);
       });
     }
   }

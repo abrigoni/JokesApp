@@ -1,5 +1,5 @@
-import React, {FC, PropsWithChildren} from 'react';
-import {View, StyleSheet, Animated, Dimensions, ListRenderItem} from 'react-native';
+import React from 'react';
+import {View, StyleSheet, Animated, Dimensions} from 'react-native';
 import Indicator from './Indicator';
 
 const styles = StyleSheet.create({

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, Text, StyleSheet, ButtonProps, ViewStyle} from 'react-native';
+import {Pressable, StyleSheet, ButtonProps, ViewStyle} from 'react-native';
 import {Colors} from '../../utils/colors';
 import { OpenSansText } from '../Typography';
 

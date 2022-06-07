@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, {FC, useContext, useEffect, useLayoutEffect} from 'react';
+import React, {FC, useContext, useLayoutEffect} from 'react';
 import {View, StyleSheet, Dimensions, FlatList} from 'react-native';
 import IconButton from '../components/IconButton';
 import JokeCard from '../components/JokeCard';
