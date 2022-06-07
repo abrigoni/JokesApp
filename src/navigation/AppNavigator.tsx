@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
-import {Colors} from '../utils/colors';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home, {HOME_ROUTE} from '../screens/Home';
 import SavedJokes, {SAVED_JOKES_ROUTE} from '../screens/SavedJokes';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { screenOptions } from './settings';
 import { AppNavigatorStackParamList } from './types';
 
 
@@ -11,10 +11,7 @@ const {Navigator, Screen} = createNativeStackNavigator<AppNavigatorStackParamLis
 const AppNavigator: FC = () => {
   return (
     <Navigator
-      screenOptions={{
-        headerStyle: {backgroundColor: Colors.white},
-        contentStyle: {backgroundColor: Colors.white},
-      }}>
+      screenOptions={screenOptions}>
       <Screen
         name={HOME_ROUTE}
         component={Home}

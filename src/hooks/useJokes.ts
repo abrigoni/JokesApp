@@ -9,11 +9,12 @@ const useJokes = () => {
   });
   const [jokes, setJokes] = useState<Joke[]>([]);
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [loadBack, setLoadBack] = useState<boolean>(false);
+  const [loadIndex, setLoadIndex] = useState<boolean>(false);
 
-  const handleFetch: () => void = useCallback(async () => {
+  // fetch 10 new jokes
+  const loadJokes: () => void = useCallback(async () => {
     const newJokes: Joke[] = [];
-    for (let i = 0; i <= 4; i++) {
+    for (let i = 0; i < 10; i++) {
       const response = await fetchJoke();
       if (response.data) {
         newJokes.push(response.data.joke);
@@ -24,28 +25,38 @@ const useJokes = () => {
 
   // initial load
   useEffect(() => {
-    handleFetch();
+    loadJokes();
   }, []);
 
+  useEffect(() => {
+    // background load of 10 new jokes
+    if (activeIndex > 0 && (jokes.length - activeIndex) === 2) {
+      loadJokes();
+    }
+  }, [activeIndex, jokes]);
+
+  // update index to display 4 new more jokes
   const fetchMore = () => {
+    setLoadIndex(true);
     setActiveIndex(activeIndex + 4);
-    handleFetch();
+    setTimeout(() => {
+      setLoadIndex(false);
+    }, 500);
   };
 
+  // update index to display 4 previous jokes
   const fetchBack = () => {
     if (activeIndex >= 4) {
-      setLoadBack(true);
+      setLoadIndex(true);
       setActiveIndex(activeIndex - 4);
       setTimeout(() => {
-        setLoadBack(false);
-      }, 1000);
+        setLoadIndex(false);
+      }, 500);
     }
-
   };
-  console.log(jokes.length);
   return {
     activeJokes: jokes.slice(activeIndex, activeIndex + 4),
-    loading: loading || jokes.length < 4 || loadBack,
+    loading: loading || loadIndex,
     triggerFetchMore: fetchMore,
     triggerFetchBack: fetchBack,
   };

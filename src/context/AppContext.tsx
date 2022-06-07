@@ -65,7 +65,7 @@ const AppContextProvider = ({children}: {children: React.ReactNode}) => {
 
   const removeJoke = (id: string) => {
     setSavedJokes((jokes: Joke[]) =>
-      jokes.filter((joke: Joke) => joke.id !== id),
+      jokes.filter((joke: Joke) => joke?.id !== id),
     );
     realm_deleteJoke(id);
   };

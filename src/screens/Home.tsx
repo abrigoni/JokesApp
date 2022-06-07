@@ -1,4 +1,4 @@
-import React, {FC, useContext, useLayoutEffect, useRef, useState} from 'react';
+import React, {FC, useCallback, useContext, useLayoutEffect, useRef, useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -100,20 +100,21 @@ const Home: FC<HomeProps> = ({navigation}) => {
     });
   }, [navigation, savedJokes]);
 
-  const handleChangeIndex = (index: number) => {
+  const handleChangeIndex = useCallback((index: number) => {
     setCurrentIndex(index);
-  };
+  }, [setCurrentIndex]);
 
-  const handleFetchMore = () => {
+  const handleFetchMore = useCallback(() => {
     triggerFetchMore();
-  };
+  }, [triggerFetchMore]);
 
-  const handleFetchBack = () => {
+  const handleFetchBack = useCallback(() => {
     triggerFetchBack();
-  };
-  const handleSave = () => {
+  }, [triggerFetchBack]);
+
+  const handleSave = useCallback(() => {
     saveJoke(activeJokes[currentIndex]);
-  };
+  }, [saveJoke, activeJokes, currentIndex]);
   return (
     <SafeAreaView style={styles.screen}>
       <View style={styles.screenContent}>
