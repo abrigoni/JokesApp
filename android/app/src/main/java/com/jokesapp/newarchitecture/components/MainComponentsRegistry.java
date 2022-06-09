@@ -1,4 +1,4 @@
-package com.jokesapp.newarchitecture.components;
+package com.abrigoni.jokesapp.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
