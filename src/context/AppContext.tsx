@@ -54,8 +54,7 @@ const AppContextProvider = ({children}: {children: React.ReactNode}) => {
         realm.delete(joke);
       });
     }
-  }
-
+  };
   const saveJoke = (joke: Joke) => {
     if (!savedJokes.includes(joke)) {
       setSavedJokes((jokes: Joke[]) => [...jokes, joke]);

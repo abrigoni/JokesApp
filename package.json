@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.5",
+    "@react-native-community/netinfo": "^9.0.0",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.2",
     "graphql": "^16.5.0",

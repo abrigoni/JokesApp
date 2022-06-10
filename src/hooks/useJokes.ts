@@ -1,18 +1,23 @@
 import {useLazyQuery} from '@apollo/client';
-import {useCallback, useEffect, useState} from 'react';
+import { useCallback, useContext, useEffect, useState } from "react";
 import {FETCH_JOKE} from '../graphql/queries';
 import {Joke, JokeQueryResponse} from '../types/Joke';
+import {useNetInfo} from '@react-native-community/netinfo';
+import { AppContext } from "../context/AppContext";
 
 const useJokes = () => {
   const [fetchJoke, {loading}] = useLazyQuery<JokeQueryResponse>(FETCH_JOKE, {
     fetchPolicy: 'network-only',
   });
+
   const [jokes, setJokes] = useState<Joke[]>([]);
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [loadIndex, setLoadIndex] = useState<boolean>(false);
+  const {savedJokes} = useContext(AppContext);
+  const netInfo = useNetInfo();
 
   // fetch 10 new jokes
-  const loadJokes: () => void = useCallback(async () => {
+  const loadJokesFromApi: () => void = useCallback(async () => {
     const newJokes: Joke[] = [];
     for (let i = 0; i < 10; i++) {
       const response = await fetchJoke();
@@ -23,14 +28,26 @@ const useJokes = () => {
     setJokes([...jokes, ...newJokes]);
   }, [jokes, setJokes, fetchJoke]);
 
-  // initial load
+  const loadJokesFromInternalDB = () => {
+    setJokes(savedJokes);
+  };
+
+  const loadJokes = () => {
+    if (netInfo.isInternetReachable && netInfo.isConnected) {
+      loadJokesFromApi();
+    } else {
+      loadJokesFromInternalDB();
+    }
+  };
+
   useEffect(() => {
     loadJokes();
-  }, []);
+  }, [netInfo]);
 
   useEffect(() => {
     // background load of 10 new jokes
     if (activeIndex > 0 && (jokes.length - activeIndex) === 2) {
+      console.log('background load?');
       loadJokes();
     }
   }, [activeIndex, jokes]);
