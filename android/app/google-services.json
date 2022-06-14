@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "395158202051",
+    "project_id": "jokesapp-3ad3a",
+    "storage_bucket": "jokesapp-3ad3a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395158202051:android:291f8bac53464497a32476",
+        "android_client_info": {
+          "package_name": "com.abrigoni.jokesapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "395158202051-dqrb0ov6aknueoie1go6pj62l40jr7e4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_Ftl1O3fvYndmGDA5nBg8P8Qt73wpqIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "395158202051-dqrb0ov6aknueoie1go6pj62l40jr7e4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "395158202051-05v9o1d2hgoebgtj0pn2o8k2prorpkhs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "abrigoni.jokesapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
