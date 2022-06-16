@@ -4,7 +4,7 @@ import {ApolloProvider} from '@apollo/client';
 import {client} from './graphql/client';
 import AppNavigator from './navigation/AppNavigator';
 import {NavigationContainer} from '@react-navigation/native';
-import messaging from '@react-native-firebase/messaging';
+import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging";
 import { Alert } from 'react-native';
 
 async function requestUserPermission() {
@@ -21,10 +21,14 @@ async function requestUserPermission() {
 const App = () => {
   useEffect(() => {
     requestUserPermission();
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
+    // foreground
+    messaging().onMessage(async remoteMessage => {
       Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
     });
-    return unsubscribe;
+    messaging().onNotificationOpenedApp(async remoteMessage => {
+      Alert.alert('Notification opened app when it was on background');
+    });
+    messaging().getInitialNotification(async () => Alert.alert("Notificacion opened app when it was on quit mode"));
   }, []);
   return (
     <ApolloProvider client={client}>
