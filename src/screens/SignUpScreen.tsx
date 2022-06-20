@@ -7,10 +7,10 @@ import JokeCard from "../components/JokeCard";
 import AuthForm from "../components/AuthForm/AuthForm";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppNavigatorStackParamList } from "../navigation/types";
-import { SIGN_UP_ROUTE } from "./SignUpScreen";
+import { SIGN_IN_ROUTE } from "./SignInScreen";
 
 
-export const SIGN_IN_ROUTE = 'SignIn';
+export const SIGN_UP_ROUTE = 'SignUp';
 
 const { width, height } = Dimensions.get('window');
 
@@ -65,24 +65,24 @@ const styles = StyleSheet.create({
   },
 });
 
-type SignInScreenProps = NativeStackScreenProps<AppNavigatorStackParamList>;
+type SignUpScreenProps = NativeStackScreenProps<AppNavigatorStackParamList>;
 
-const SignInScreen = ({navigation}: SignInScreenProps) => {
+const SignUpScreen = ({navigation}: SignUpScreenProps) => {
   return (
     <View style={styles.screen}>
       <View style={styles.header}>
-        <OpenSansText variant={'SemiBold'} size={'H1'}>Welcome Back!</OpenSansText>
+        <OpenSansText variant={'SemiBold'} size={'H1'}>Join us!</OpenSansText>
         <OpenSansText variant={'SemiBold'} size={'Body'}>
-          Fill in the form with your credentials
+          Fill in the form to create an account
         </OpenSansText>
       </View>
-      <AuthForm />
+      <AuthForm isSignIn={false} />
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <View style={styles.line} />
-        <OpenSansText variant={'Regular'} size={'Body'} style={{paddingHorizontal: 6,}}>OR</OpenSansText>
+        <OpenSansText variant={'Regular'} size={'Body'} style={{paddingHorizontal: 6,}}>Already have an account?</OpenSansText>
         <View style={styles.line} />
       </View>
-      <OpenSansText variant={'Bold'} size={'Body'} style={styles.createAccountText} onPress={() => navigation.navigate(SIGN_UP_ROUTE)}>Create an account</OpenSansText>
+      <OpenSansText variant={'Bold'} size={'Body'} style={styles.createAccountText} onPress={() => navigation.navigate(SIGN_IN_ROUTE)}>Sign in!</OpenSansText>
       <View style={styles.bottomRightCard}>
         <JokeCard
           content={"Why is Peter Pan always flying? Because he Neverlands."}
@@ -119,4 +119,4 @@ const SignInScreen = ({navigation}: SignInScreenProps) => {
   )
 };
 
-export default SignInScreen;
+export default SignUpScreen;

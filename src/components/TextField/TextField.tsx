@@ -36,17 +36,17 @@ const TextField = ({secure = false, name, placeholder, value, handleChange, icon
 
   return (
     <View style={styles.inputContainer}>
-      {iconLeft && <Icon name={iconLeft} size={iconLeftSize} color={"#95a5a6"} />}
+      {iconLeft && <Icon name={iconLeft} size={iconLeftSize} color={"#535c68"} />}
       <TextInput
         placeholder={placeholder}
-        placeholderTextColor={'#95a5a6'}
+        placeholderTextColor={'#535c68'}
         autoCorrect={false}
         secureTextEntry={secure}
         style={styles.input}
         value={value}
         onChangeText={handleChange.bind(this, name)}
       />
-      {iconRight && handleIconRightPress && <IconButton name={iconRight} size={20} onPress={handleIconRightPress} />}
+      {iconRight && handleIconRightPress && <IconButton name={iconRight} size={20} onPress={handleIconRightPress} color="#535c68" />}
     </View>
   )
 };

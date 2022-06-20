@@ -4,8 +4,10 @@ import {ApolloProvider} from '@apollo/client';
 import {client} from './graphql/client';
 import AppNavigator from './navigation/AppNavigator';
 import {NavigationContainer} from '@react-navigation/native';
-import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging";
-import { Alert } from 'react-native';
+import messaging from "@react-native-firebase/messaging";
+import { Alert, Text } from 'react-native';
+import useAuth from "./hooks/useAuth";
+import LoadingOverlay from "./components/LoadingOverlay";
 
 async function requestUserPermission() {
   const authStatus = await messaging().requestPermission();
@@ -19,6 +21,7 @@ async function requestUserPermission() {
 }
 
 const App = () => {
+  const { initializing } = useAuth();
   useEffect(() => {
     requestUserPermission();
     // foreground
@@ -28,8 +31,12 @@ const App = () => {
     messaging().onNotificationOpenedApp(async remoteMessage => {
       Alert.alert('Notification opened app when it was on background');
     });
-    messaging().getInitialNotification(async () => Alert.alert("Notificacion opened app when it was on quit mode"));
   }, []);
+  
+  if (initializing) {
+    return <LoadingOverlay />;
+  }
+
   return (
     <ApolloProvider client={client}>
       <AppContextProvider>

@@ -9,6 +9,7 @@ type OpenSansTextProps = {
   children: React.ReactNode;
   variant?: TextVariants;
   size?: TextSizes;
+  onPress?: () => void;
   style?: any;
 }
 
@@ -40,10 +41,11 @@ const OpenSansText = ({
   children,
   variant = 'Regular',
   size = "Body",
+  onPress,
   style,
 }: OpenSansTextProps) => {
   return (
-    <Text style={[sizesStyle[size], variantsStyle[variant], style]}>
+    <Text style={[sizesStyle[size], variantsStyle[variant], style]} onPress={onPress}>
       {children}
     </Text>
   );
