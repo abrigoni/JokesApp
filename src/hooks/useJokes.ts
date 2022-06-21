@@ -47,7 +47,6 @@ const useJokes = () => {
   useEffect(() => {
     // background load of 10 new jokes
     if (activeIndex > 0 && (jokes.length - activeIndex) === 2) {
-      console.log('background load?');
       loadJokes();
     }
   }, [activeIndex, jokes]);

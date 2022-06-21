@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Dimensions } from "react-native";
+import { StyleSheet, View, Dimensions, Alert } from "react-native";
 import { OpenSansText } from "../components/Typography";
 import { Colors } from "../utils/colors";
 import IconButton from "../components/IconButton";
@@ -8,6 +8,7 @@ import AuthForm from "../components/AuthForm/AuthForm";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppNavigatorStackParamList } from "../navigation/types";
 import { SIGN_IN_ROUTE } from "./SignInScreen";
+import useAuth from "../hooks/useAuth";
 
 
 export const SIGN_UP_ROUTE = 'SignUp';
@@ -68,6 +69,13 @@ const styles = StyleSheet.create({
 type SignUpScreenProps = NativeStackScreenProps<AppNavigatorStackParamList>;
 
 const SignUpScreen = ({navigation}: SignUpScreenProps) => {
+  const {signUp} = useAuth();
+  const handleSubmit = async (email: string, password: string) => {
+    const result = await signUp(email, password);
+    if (result.error) {
+      Alert.alert("Error", result.error);
+    }
+  };
   return (
     <View style={styles.screen}>
       <View style={styles.header}>
@@ -76,7 +84,7 @@ const SignUpScreen = ({navigation}: SignUpScreenProps) => {
           Fill in the form to create an account
         </OpenSansText>
       </View>
-      <AuthForm isSignIn={false} />
+      <AuthForm isSignIn={false} onSubmit={handleSubmit} />
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <View style={styles.line} />
         <OpenSansText variant={'Regular'} size={'Body'} style={{paddingHorizontal: 6,}}>Already have an account?</OpenSansText>

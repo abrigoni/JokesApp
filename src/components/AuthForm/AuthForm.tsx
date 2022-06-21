@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import TextField from '../TextField';
 import Button from '../Button';
-import useAuth from '../../hooks/useAuth';
 
 const styles = StyleSheet.create({
   button: {
@@ -12,10 +11,10 @@ const styles = StyleSheet.create({
 
 interface Props {
   isSignIn?: boolean;
+  onSubmit: (email: string, password: string) => void;
 }
 
-const AuthForm = ({isSignIn = true}: Props) => {
-  const {signIn, signUp } = useAuth();
+const AuthForm = ({isSignIn = true, onSubmit}: Props) => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const [form, setForm] = useState({
     email: '',
@@ -29,13 +28,6 @@ const AuthForm = ({isSignIn = true}: Props) => {
       ...form,
       [name]: value,
     });
-  };
-  const handleSignIn = () => {
-    signIn(form.email, form.password);
-  };
-
-  const handleSignUp = () => {
-    signUp(form.email, form.password);
   };
   return (
     <View>
@@ -57,7 +49,7 @@ const AuthForm = ({isSignIn = true}: Props) => {
         iconRight={passwordVisible ? 'eye-slash' : 'eye'}
         handleIconRightPress={handlePasswordVisibleChange}
       />
-      <Button title={isSignIn ? "Sign In" : "Sign Up"} style={styles.button} onPress={isSignIn ? handleSignIn : handleSignUp} />
+      <Button title={isSignIn ? "Sign In" : "Sign Up"} style={styles.button} onPress={onSubmit.bind(this, form.email, form.password)} />
     </View>
   );
 }

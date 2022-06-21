@@ -13,13 +13,21 @@ const useAuth = () => {
   };
 
   const signIn = async (email: string, password: string) => {
-    const response = await auth().signInWithEmailAndPassword(email, password);
-    return response.user;
+    try {
+      const response = await auth().signInWithEmailAndPassword(email, password);
+      return { user: response.user };
+    } catch (e: any) {
+      return { error: e.message };
+    }
   };
 
   const signUp = async (email: string, password: string) => {
-    const response = await auth().createUserWithEmailAndPassword(email, password);
-    return response.user;
+    try {
+      const response = await auth().createUserWithEmailAndPassword(email, password);
+      return { user: response.user };
+    } catch (e: any) {
+      return { error: e.message };
+    }
   };
 
   const signOut = () => {
