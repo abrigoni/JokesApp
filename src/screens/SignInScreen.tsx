@@ -9,6 +9,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppNavigatorStackParamList } from "../navigation/types";
 import { SIGN_UP_ROUTE } from "./SignUpScreen";
 import useAuth from "../hooks/useAuth";
+import analytics from '@react-native-firebase/analytics';
 
 
 export const SIGN_IN_ROUTE = 'SignIn';
@@ -90,7 +91,19 @@ const SignInScreen = ({navigation}: SignInScreenProps) => {
         <OpenSansText variant={'Regular'} size={'Body'} style={{paddingHorizontal: 6,}}>OR</OpenSansText>
         <View style={styles.line} />
       </View>
-      <OpenSansText variant={'Bold'} size={'Body'} style={styles.createAccountText} onPress={() => navigation.navigate(SIGN_UP_ROUTE)}>Create an account</OpenSansText>
+      <OpenSansText
+        variant={'Bold'}
+        size={'Body'}
+        style={styles.createAccountText}
+        onPress={async () => {
+          await analytics().logEvent('Navigate', {
+            screen: 'SignIn',
+            to: 'SignUp'
+          });
+          navigation.navigate(SIGN_UP_ROUTE)}
+        }>
+          Create an account
+        </OpenSansText>
       <View style={styles.bottomRightCard}>
         <JokeCard
           content={"Why is Peter Pan always flying? Because he Neverlands."}

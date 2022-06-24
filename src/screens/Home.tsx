@@ -20,6 +20,7 @@ import {Joke} from '../types/Joke';
 import useJokes from '../hooks/useJokes';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AppNavigatorStackParamList } from '../navigation/types';
+import analytics from '@react-native-firebase/analytics';
 
 const {width} = Dimensions.get('window');
 
@@ -89,7 +90,13 @@ const Home: FC<HomeProps> = ({navigation}) => {
       headerRight: () => (
         <Pressable
           style={styles.row}
-          onPress={() => navigation.navigate(SAVED_JOKES_ROUTE)}
+          onPress={async () => {
+            await analytics().logEvent('Navigate', {
+              screen: 'Home',
+              to: 'Saved',
+            });
+            navigation.navigate(SAVED_JOKES_ROUTE)}
+          }
         >
           <OpenSansText size="Body" variant="Bold">
             Saved: {savedJokes.length}{' '}
