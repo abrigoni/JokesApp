@@ -11,6 +11,7 @@ import { SIGN_UP_ROUTE } from "./SignUpScreen";
 import useAuth from "../hooks/useAuth";
 import analytics from '@react-native-firebase/analytics';
 
+import Analytics from 'appcenter-analytics';
 
 export const SIGN_IN_ROUTE = 'SignIn';
 
@@ -97,6 +98,12 @@ const SignInScreen = ({navigation}: SignInScreenProps) => {
         size={'Body'}
         style={styles.createAccountText}
         onPress={async () => {
+          // MS appcenter
+          Analytics.trackEvent("Navigate", {
+            screen: 'SignIn',
+            to: 'SignUp',
+          });
+          // Firebase
           await analytics().logEvent('Navigate', {
             screen: 'SignIn',
             to: 'SignUp'

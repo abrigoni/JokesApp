@@ -19,6 +19,7 @@
 		3670542121EA4EC09A4DCB28 /* IndieFlower-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C96A8B2E24C41EA8359C4BB /* IndieFlower-Regular.ttf */; };
 		4BA68D6C338C49D899545DA7 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 995592C005CD4DDDB0C23F91 /* OpenSans-BoldItalic.ttf */; };
 		4C24931D2858D22E00964C99 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C24931C2858D22E00964C99 /* GoogleService-Info.plist */; };
+		4CCDB085286B496F00BFE512 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CCDB084286B496F00BFE512 /* AppCenter-Config.plist */; };
 		4D67F34138504E039FC93BDC /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AF5CE6178714E2B9CC08229 /* OpenSans-Italic.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9AE2ADA9F3B14883A7660C24 /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 941CFDEB7C044F03B44C99AC /* OpenSans-SemiBoldItalic.ttf */; };
@@ -73,6 +74,7 @@
 		4CA21F50283C10DD006CC018 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		4CA21F51283C10DD006CC018 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		4CB3BC52285A366A00D737EE /* JokesApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = JokesApp.entitlements; path = JokesApp/JokesApp.entitlements; sourceTree = "<group>"; };
+		4CCDB084286B496F00BFE512 /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		57C25B6CF93FCBAB0E378377 /* libPods-JokesApp-JokesAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JokesApp-JokesAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77E7DC892D4940BEAECC102B /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBoldItalic.ttf"; path = "../assets/fonts/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = JokesApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				4CCDB084286B496F00BFE512 /* AppCenter-Config.plist */,
 				4C24931C2858D22E00964C99 /* GoogleService-Info.plist */,
 				4CA21F41283C10DD006CC018 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* JokesApp */,
@@ -348,6 +351,7 @@
 				E827B136838A4DEA975DD7DE /* OpenSans-Medium.ttf in Resources */,
 				CD959C9DF7BB47C1B1335806 /* OpenSans-MediumItalic.ttf in Resources */,
 				E2E8CD53353343C8AC34CA71 /* OpenSans-Regular.ttf in Resources */,
+				4CCDB085286B496F00BFE512 /* AppCenter-Config.plist in Resources */,
 				A11B373770524CAFA09E4BDE /* OpenSans-SemiBold.ttf in Resources */,
 				9AE2ADA9F3B14883A7660C24 /* OpenSans-SemiBoldItalic.ttf in Resources */,
 				3670542121EA4EC09A4DCB28 /* IndieFlower-Regular.ttf in Resources */,
