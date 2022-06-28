@@ -72,6 +72,7 @@ type SignInScreenProps = NativeStackScreenProps<AppNavigatorStackParamList>;
 const SignInScreen = ({navigation}: SignInScreenProps) => {
   const { signIn } = useAuth();
   const handleSubmit = async (email: string, password: string) => {
+    await analytics().logEvent('login');
     const result = await signIn(email, password);
     if (result.error) {
       Alert.alert("Error", result.error);

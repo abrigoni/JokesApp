@@ -7,6 +7,7 @@ import {OpenSansText} from '../components/Typography';
 import {AppContext} from '../context/AppContext';
 import { AppNavigatorStackParamList } from '../navigation/types';
 import {Colors} from '../utils/colors';
+import analytics from '@react-native-firebase/analytics';
 
 export const SAVED_JOKES_ROUTE = 'SavedJokes';
 
@@ -55,7 +56,8 @@ const SavedJokes: FC<SavedJokesProps> = ({navigation}) => {
     });
   }, [navigation, savedJokes]);
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
+    await analytics().logEvent('delete_joke');
     removeJoke(id);
   };
   return (

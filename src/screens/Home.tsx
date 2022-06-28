@@ -119,7 +119,10 @@ const Home: FC<HomeProps> = ({navigation}) => {
     triggerFetchBack();
   }, [triggerFetchBack]);
 
-  const handleSave = useCallback(() => {
+  const handleSave = useCallback(async () => {
+    await analytics().logEvent('save_joke', {
+      joke: activeJokes[currentIndex],
+    });
     saveJoke(activeJokes[currentIndex]);
   }, [saveJoke, activeJokes, currentIndex]);
   return (

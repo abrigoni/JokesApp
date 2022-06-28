@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import auth from '@react-native-firebase/auth';
+import analytics from '@react-native-firebase/analytics';
 
 const useAuth = () => {
   const [initializing, setInitializing] = useState(true);
@@ -30,7 +31,8 @@ const useAuth = () => {
     }
   };
 
-  const signOut = () => {
+  const signOut = async () => {
+    await analytics().logEvent('sign_out');
     auth().signOut();
   };
 

@@ -9,6 +9,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AppNavigatorStackParamList } from "../navigation/types";
 import { SIGN_IN_ROUTE } from "./SignInScreen";
 import useAuth from "../hooks/useAuth";
+import analytics from '@react-native-firebase/analytics';
 
 
 export const SIGN_UP_ROUTE = 'SignUp';
@@ -71,6 +72,7 @@ type SignUpScreenProps = NativeStackScreenProps<AppNavigatorStackParamList>;
 const SignUpScreen = ({navigation}: SignUpScreenProps) => {
   const {signUp} = useAuth();
   const handleSubmit = async (email: string, password: string) => {
+    await analytics().logEvent('sign_up');
     const result = await signUp(email, password);
     if (result.error) {
       Alert.alert("Error", result.error);
@@ -90,7 +92,20 @@ const SignUpScreen = ({navigation}: SignUpScreenProps) => {
         <OpenSansText variant={'Regular'} size={'Body'} style={{paddingHorizontal: 6,}}>Already have an account?</OpenSansText>
         <View style={styles.line} />
       </View>
-      <OpenSansText variant={'Bold'} size={'Body'} style={styles.createAccountText} onPress={() => navigation.navigate(SIGN_IN_ROUTE)}>Sign in!</OpenSansText>
+      <OpenSansText
+        variant={'Bold'}
+        size={'Body'}
+        style={styles.createAccountText}
+        onPress={async () => {
+          await analytics().logEvent('Navigate', {
+            screen: 'SignUp',
+            to: 'SignIn'
+          });
+          navigation.navigate(SIGN_IN_ROUTE)}
+        }
+      >
+        Sign in!
+      </OpenSansText>
       <View style={styles.bottomRightCard}>
         <JokeCard
           content={"Why is Peter Pan always flying? Because he Neverlands."}
